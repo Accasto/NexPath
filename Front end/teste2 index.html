@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FinanceIA - Assistente Financeiro</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:white;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 10%;
+    background:#020617;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#22c55e;
+}
+
+nav a{
+    margin-left:20px;
+    text-decoration:none;
+    color:white;
+}
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1{
+    font-size:48px;
+}
+
+.hero p{
+    font-size:18px;
+    color:#cbd5f5;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    background:#22c55e;
+    color:white;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    padding:60px 10%;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.chat-box{
+    height:250px;
+    background:#020617;
+    border-radius:10px;
+    padding:15px;
+    overflow-y:auto;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border-radius:8px;
+    border:none;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#020617;
+    margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">FinanceIA</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Recursos</a>
+<a href="#">Dashboard</a>
+<a href="#">Contato</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Controle seu dinheiro com a IA</h1>
+
+<p>Uma inteligência artificial que analisa seus gastos, cria gráficos e te ajuda a manter sua conta positiva.</p>
+
+<a class="btn" href="#">Começar Agora</a>
+
+</section>
+
+<section class="container">
+
+<div class="card">
+
+<h2>Assistente Financeiro 🤖</h2>
+
+<div class="chat-box">
+
+<p><strong>IA:</strong> Olá! Como posso ajudar com suas finanças hoje?</p>
+
+</div>
+
+<input type="text" placeholder="Digite sua pergunta...">
+
+</div>
+
+<div class="card">
+
+<h2>Resumo financeiro 📊</h2>
+
+<p>Receita mensal: R$ <input type="number" id="receita"></p>
+
+<p>Despesas: R$ <input type="number" id="despesas"></p>
+
+<p>Saldo: R$ <span id="saldo">0</span></p>
+
+<button onclik="calcular()">Calcular saldo</button>
+
+<canvas id="grafico"></canvas>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 FinanceIA - Assistente Financeiro Inteligente</p>
+
+</footer>
+
+<script>
+
+function calcular(){
+let receita = document.getElementById("receita").value;
+let despesas = document.getElementById("despesas").value
+
+receita = Number(receita);
+despesas = Number(despesas);
+
+let saldo = receita - despesas;
+
+document.getElementById("saldo").innerText = saldo;
+
+}
+
+</script>
+
+</body>
+
+</html>
