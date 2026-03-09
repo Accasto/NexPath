@@ -8,96 +8,7 @@
 
 <title>FinanCeeIA - Assistente Pessoal Financeiro</title>
 
-<style>
-
-body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    color:white;
-}
-
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 10%;
-    background:#020617;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:bold;
-    color:#22c55e;
-}
-
-nav a{
-    margin-left:20px;
-    text-decoration:none;
-    color:white;
-}
-
-.hero{
-    text-align:center;
-    padding:80px 20px;
-}
-
-.hero h1{
-    font-size:48px;
-}
-
-.hero p{
-    font-size:18px;
-    color:#cbd5f5;
-}
-
-.btn{
-    display:inline-block;
-    margin-top:20px;
-    padding:12px 25px;
-    background:#22c55e;
-    color:white;
-    border-radius:8px;
-    text-decoration:none;
-}
-
-.container{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    padding:60px 10%;
-}
-
-.card{
-    background:#1e293b;
-    padding:25px;
-    border-radius:12px;
-}
-
-.chat-box{
-    height:250px;
-    background:#020617;
-    border-radius:10px;
-    padding:15px;
-    overflow-y:auto;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
-    border:none;
-}
-
-footer{
-    text-align:center;
-    padding:20px;
-    background:#020617;
-    margin-top:40px;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -166,24 +77,8 @@ footer{
 
 </footer>
 
-<script>
-
-function calcular(){
-let receita = document.getElementById("receita").value;
-let despesas = document.getElementById("despesas").value
-
-receita = Number(receita);
-despesas = Number(despesas);
-
-let saldo = receita - despesas;
-
-document.getElementById("saldo").innerText = saldo;
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
-
 
 </html>
