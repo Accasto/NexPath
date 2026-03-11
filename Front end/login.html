@@ -1,75 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>Login - FinanCeeIA</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<title>Login - FinanCeeIA</title>
+  <body>
+    <section class="hero">
+      <h1>Entrar no FinanCeeIA</h1>
 
-<link rel="stylesheet" href="style.css">
+      <div class="card login-card">
+        <input type="email" placeholder="Email" required />
 
-</head>
+        <input type="password" placeholder="Senha" required />
 
-<body>
+        <button class="btn" onclick="return validarLogin();">Entrar</button>
 
-<section class="hero">
+        <p class="register-link">
+          Não tem conta? <a href="register.html">Criar Conta</a>
+        </p>
 
-<h1>Entrar no FinanCeeIA</h1>
+        <hr />
 
-<div class="card login-card">
+        <p class="social-text">Ou continue com</p>
 
-<input type="email" placeholder="Email" required>
+        <div class="social-login">
+          <button class="social-btn">
+            <img src="icons/Google.svg" alt="Google" />
 
-<input type="password" placeholder="Senha" required>
+            Entrar com Google
+          </button>
 
-<button class="btn" onclick="return validarLogin()">Entrar</button>
+          <button class="social-btn">
+            <img src="icons/Microsoft.svg" alt="Microsoft" />
 
-<p class="register-link">Não tem conta? <a href="register.html">Criar Conta</a></p>
+            Entrar com Microsoft
+          </button>
 
-<hr>
+          <button class="social-btn">
+            <img src="icons/Github.svg" alt="GitHub" />
 
-<p class="social-text">Ou continue com</p>
+            Entrar com GitHub
+          </button>
+        </div>
+      </div>
+    </section>
 
-<div class="social-login">
+    <!-- inputs de login -->
 
-<button class="social-btn">
+    <input type="email" id="loginEmail" placeholder="Email" />
 
-<img src="icons/Google.svg" alt="Google">
-
-Entrar com Google
-
-</button>
-
-<button class="social-btn">
-
-<img src="icons/Microsoft.svg" alt="Microsoft">
-
-Entrar com Microsoft
-
-</button>
-
-<button class="social-btn">
-
-<img src="icons/Github.svg" alt="GitHub">
-
-Entrar com GitHub
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- inputs de login -->
-
-<input type="email" id="loginEmail" placeholder="Email">
-
-<input type="password" id="loginSenha" placeholder="Senha">
-
-</body>
-
+    <input type="password" id="loginSenha" placeholder="Senha" />
+  </body>
 </html>

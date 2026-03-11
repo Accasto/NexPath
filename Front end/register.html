@@ -1,74 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>Criar conta - FinanCeeIA</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<title>Criar conta - FinanCeeIA</title>
+  <body>
+    <section class="hero">
+      <h1>Criar conta no FinanCeeIA</h1>
 
-<link rel="stylesheet" href="style.css">
+      <div class="card register-card">
+        <input type="text" placeholder="Nome completo" required />
 
-</head>
+        <input type="email" placeholder="Email" required />
 
-<body>
+        <input type="password" placeholder="Senha" required />
 
-<section class="hero">
+        <input type="password" placeholder="Confirmar senha" required />
 
-<h1>Criar conta no FinanCeeIA</h1>
+        <label class="birth-label">Data de nascimento</label>
 
-<div class="card register-card">
+        <input type="date" required />
 
-<input type="text" placeholder="Nome completo" required>
+        <div class="terms">
+          <input type="checkbox" id="terms" />
 
-<input type="email" placeholder="Email" required>
+          <label for="terms">
+            Eu aceito os
+            <span class="terms-link" onclick="abrirTermos()"
+              >Termos de Uso</span
+            >
+          </label>
+        </div>
 
-<input type="password" placeholder="Senha" required>
+        <button class="btn" onclick="return validarRegistro();">
+          Criar conta
+        </button>
 
-<input type="password" placeholder="Confirmar senha" required>
+        <p class="login-link">
+          Já possui conta?<a href="login.html"> Entrar</a>
+        </p>
+      </div>
+    </section>
 
-<label class="birth-label">Data de nascimento</label>
+    <div id="popup-termos" class="popup">
+      <div class="popup-content">
+        <h2>Termos de Uso</h2>
 
-<input type="date" required>
+        <p>
+          Aqui você poderá colocar todos os termos do FinanCeeIA. Explique uso
+          de dados financeiros, privacidade, segurança etc.
+        </p>
 
-<div class="terms">
+        <button onclick="fecharTermos()" class="btn">Fechar</button>
 
-<input type="checkbox" id="terms">
-
-<label for="terms">
-Eu aceito os <span class="terms-link" onclick="abrirTermos()">Termos de Uso</span>
-</label>
-
-</div>
-
-<button class="btn" onclick="return validarRegistro()">Criar conta</button>
-
-<p class="login-link">Já possui conta?<a href="login.html"> Entrar</a></p>
-
-</div>
-
-</section>
-
-<div id="popup-termos" class="popup">
-
-<div class="popup-content">
-
-<h2>Termos de Uso</h2>
-
-<p>
-Aqui você poderá colocar todos os termos do FinanCeeIA.
-Explique uso de dados financeiros, privacidade, segurança etc.
-</p>
-
-<button onclick="fecharTermos()" class="btn">Fechar</button>
-
-<script src="script.js"></script>
-
-</div>
-
-</div>
-
-</body>
-
+        <script src="script.js"></script>
+      </div>
+    </div>
+  </body>
 </html>

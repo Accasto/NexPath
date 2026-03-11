@@ -1,84 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>FinanCeeIA - Assistente Pessoal Financeiro</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<title>FinanCeeIA - Assistente Pessoal Financeiro</title>
+  <body>
+    <header>
+      <div class="logo">FinanCeeIA</div>
 
-<link rel="stylesheet" href="style.css">
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Recursos</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Contato</a>
+      </nav>
+    </header>
 
-</head>
+    <section class="hero">
+      <h1>Controle seu dinheiro com a IA</h1>
 
-<body>
+      <p>
+        Uma inteligência artificial que analisa seus gastos, cria gráficos e te
+        ajuda a manter sua conta positiva.
+      </p>
 
-<header>
+      <a class="btn" href="login.html">Começar Agora</a>
+    </section>
 
-<div class="logo">FinanCeeIA</div>
+    <section class="container">
+      <div class="card">
+        <h2>Assistente Financeiro 🤖</h2>
 
-<nav>
-<a href="#">Home</a>
-<a href="#">Recursos</a>
-<a href="#">Dashboard</a>
-<a href="#">Contato</a>
-</nav>
+        <div class="chat-box">
+          <p>
+            <strong>IA:</strong> Olá! Como posso ajudar com suas finanças hoje?
+          </p>
+        </div>
 
-</header>
+        <input type="text" placeholder="Digite sua pergunta..." />
+      </div>
 
-<section class="hero">
+      <div class="card">
+        <h2>Resumo financeiro 📊</h2>
 
-<h1>Controle seu dinheiro com a IA</h1>
+        <p>Receita mensal: R$ <input type="number" id="receita" /></p>
 
-<p>Uma inteligência artificial que analisa seus gastos, cria gráficos e te ajuda a manter sua conta positiva.</p>
+        <p>Despesas: R$ <input type="number" id="despesas" /></p>
 
-<a class="btn" href="login.html">Começar Agora</a>
+        <p>Saldo: R$ <span id="saldo">0</span></p>
 
-</section>
+        <button onclick="calcular()">Calcular saldo</button>
 
-<section class="container">
+        <canvas id="grafico"></canvas>
+      </div>
+    </section>
 
-<div class="card">
+    <footer>
+      <p>© 2026 FinanCeeIA - Assistente Financeiro Inteligente</p>
+    </footer>
 
-<h2>Assistente Financeiro 🤖</h2>
-
-<div class="chat-box">
-
-<p><strong>IA:</strong> Olá! Como posso ajudar com suas finanças hoje?</p>
-
-</div>
-
-<input type="text" placeholder="Digite sua pergunta...">
-
-</div>
-
-<div class="card">
-
-<h2>Resumo financeiro 📊</h2>
-
-<p>Receita mensal: R$ <input type="number" id="receita"></p>
-
-<p>Despesas: R$ <input type="number" id="despesas"></p>
-
-<p>Saldo: R$ <span id="saldo">0</span></p>
-
-<button onclick="calcular()">Calcular saldo</button>
-
-<canvas id="grafico"></canvas>
-
-</div>
-
-</section>
-
-<footer>
-
-<p>© 2026 FinanCeeIA - Assistente Financeiro Inteligente</p>
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
