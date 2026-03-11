@@ -11,3 +11,11 @@ let saldo = receita - despesas;
 document.getElementById("saldo").innerText = saldo;
 
 }
+
+function abrirTermos(){
+document.getElementById("popup-termos").style.display = "flex";
+}
+
+function fecharTermos(){
+document.getElementById("popup-termos").style.display = "none";
+}
