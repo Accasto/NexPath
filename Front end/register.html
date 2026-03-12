@@ -13,21 +13,75 @@
     <section class="hero">
       <h1>Criar conta no FinanCeeIA</h1>
 
-      <div class="card register-card">
-        <input type="text" placeholder="Nome completo" required />
+      <form
+        class="card register-card"
+        id="registerForm"
+        onsubmit="return validarRegistro();"
+      >
+        <input
+          id="nome"
+          name="nome"
+          type="text"
+          placeholder="Nome completo"
+          required
+          oninvalid="this.setCustomValidity('Por favor, preencha o nome.')"
+          oninput="this.setCustomValidity('')"
+        />
 
-        <input type="email" placeholder="Email" required />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          oninvalid="this.setCustomValidity('Por favor, preencha o email.')"
+          oninput="this.setCustomValidity('')"
+        />
 
-        <input type="password" placeholder="Senha" required />
+        <input
+          id="senha"
+          name="senha"
+          type="password"
+          placeholder="Senha"
+          required
+          oninvalid="this.setCustomValidity('Por favor, preencha a senha.')"
+          oninput="this.setCustomValidity('')"
+        />
 
-        <input type="password" placeholder="Confirmar senha" required />
+        <input
+          id="confirmarSenha"
+          name="confirmarSenha"
+          type="password"
+          placeholder="Confirmar senha"
+          required
+          oninvalid="this.setCustomValidity('Por favor, confirme a senha.')"
+          oninput="this.setCustomValidity('')"
+        />
 
-        <label class="birth-label">Data de nascimento</label>
+        <label class="birth-label" for="nascimento">Data de nascimento</label>
 
-        <input type="date" required />
+        <input
+          id="nascimento"
+          name="nascimento"
+          type="date"
+          required
+          oninvalid="
+            this.setCustomValidity('Por favor, informe a data de nascimento.')
+          "
+          oninput="this.setCustomValidity('')"
+        />
 
         <div class="terms">
-          <input type="checkbox" id="terms" />
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            required
+            oninvalid="
+              this.setCustomValidity('Você precisa aceitar os termos de uso.')
+            "
+            oninput="this.setCustomValidity('')"
+          />
 
           <label for="terms">
             Eu aceito os
@@ -37,14 +91,12 @@
           </label>
         </div>
 
-        <button class="btn" onclick="return validarRegistro();">
-          Criar conta
-        </button>
+        <button class="btn" type="submit">Criar conta</button>
 
         <p class="login-link">
           Já possui conta?<a href="login.html"> Entrar</a>
         </p>
-      </div>
+      </form>
     </section>
 
     <div id="popup-termos" class="popup">
@@ -57,9 +109,9 @@
         </p>
 
         <button onclick="fecharTermos()" class="btn">Fechar</button>
-
-        <script src="script.js"></script>
       </div>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

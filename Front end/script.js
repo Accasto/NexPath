@@ -44,9 +44,31 @@ function validarRegistro() {
         return false;
     }
 
+    // verificação de caractere especial
+    const specialRegex = /[!@#$%^&*(),.?":{}|<>\[\]\/\\~`';:\-_+=]/;
+    if (!specialRegex.test(senha)) {
+        alert("A senha precisa conter pelo menos um caractere especial.");
+        return false;
+    }
+
     if (senha !== confirmar) {
         alert("As senhas não coincidem.");
         return false;
+    }
+
+    // calcular idade mínima de 10 anos
+    if (nascimento !== "") {
+        const hoje = new Date();
+        const dataNasc = new Date(nascimento);
+        let idade = hoje.getFullYear() - dataNasc.getFullYear();
+        const m = hoje.getMonth() - dataNasc.getMonth();
+        if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {
+            idade--;
+        }
+        if (idade < 10) {
+            alert("É necessário ter pelo menos 10 anos para criar uma conta.");
+            return false;
+        }
     }
 
     if (!termos) {
@@ -60,6 +82,30 @@ function validarRegistro() {
 }
 
 /* login */
+
+// set up listeners when DOM is ready
+if (document.readyState !== 'loading') {
+    setupListeners();
+} else {
+    document.addEventListener('DOMContentLoaded', setupListeners);
+}
+
+function setupListeners() {
+    const senhaInput = document.getElementById('senha');
+    const confirmarInput = document.getElementById('confirmarSenha');
+
+    if (senhaInput && confirmarInput) {
+        const validatePasswordMatch = () => {
+            if (senhaInput.value !== confirmarInput.value) {
+                confirmarInput.setCustomValidity('As senhas não coincidem.');
+            } else {
+                confirmarInput.setCustomValidity('');
+            }
+        };
+        senhaInput.addEventListener('input', validatePasswordMatch);
+        confirmarInput.addEventListener('input', validatePasswordMatch);
+    }
+}
 
 function validarLogin() {
 

@@ -13,12 +13,28 @@
     <section class="hero">
       <h1>Entrar no FinanCeeIA</h1>
 
-      <div class="card login-card">
-        <input type="email" placeholder="Email" required />
+      <form
+        class="card login-card"
+        id="loginForm"
+        onsubmit="return validarLogin();"
+      >
+        <input
+          id="loginEmail"
+          name="loginEmail"
+          type="email"
+          placeholder="Email"
+          required
+        />
 
-        <input type="password" placeholder="Senha" required />
+        <input
+          id="loginSenha"
+          name="loginSenha"
+          type="password"
+          placeholder="Senha"
+          required
+        />
 
-        <button class="btn" onclick="return validarLogin();">Entrar</button>
+        <button class="btn" type="submit">Entrar</button>
 
         <p class="register-link">
           Não tem conta? <a href="register.html">Criar Conta</a>
@@ -47,13 +63,9 @@
             Entrar com GitHub
           </button>
         </div>
-      </div>
+      </form>
     </section>
 
-    <!-- inputs de login -->
-
-    <input type="email" id="loginEmail" placeholder="Email" />
-
-    <input type="password" id="loginSenha" placeholder="Senha" />
+    <script src="script.js"></script>
   </body>
 </html>
