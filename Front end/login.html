@@ -24,6 +24,8 @@
           type="email"
           placeholder="Email"
           required
+          oninvalid="this.setCustomValidity('Por favor, preencha um email válido.')"
+          oninput="this.setCustomValidity('')"
         />
 
         <input
@@ -31,7 +33,10 @@
           name="loginSenha"
           type="password"
           placeholder="Senha"
+          minlength="8"
           required
+          oninvalid="this.setCustomValidity('A senha precisa ter no mínimo 8 caracteres.')"
+          oninput="this.setCustomValidity('')"
         />
 
         <button class="btn" type="submit">Entrar</button>
