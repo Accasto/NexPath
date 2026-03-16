@@ -7,6 +7,5 @@ Tecnologias usadas:
 - CSS
 - JS
 - NODE.JS
-- JAVA
 - PYTHON
 - POSTGRESQL
