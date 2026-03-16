@@ -1,4 +1,4 @@
-# FinanCeeIA
+# NexPath
 
 Seu agente de organização financeira pessoal feito com IA!!!
 
