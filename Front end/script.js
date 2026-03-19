@@ -42,7 +42,7 @@ function validarRegistro() {
         senha.reportValidity();
         return false;
     }
-    
+
     // Verificar se tem símbolo
     let temSimbolo = false;
     const simbolos = "!@#$%^&*()_+-=[]{};\':\",./<>?|\\`~";
@@ -57,7 +57,7 @@ function validarRegistro() {
         senha.reportValidity();
         return false;
     }
-    
+
     // Não permitir espaços
     if (/\s/.test(senhaValor)) {
         senha.setCustomValidity("A senha não pode conter espaços.");
@@ -91,13 +91,13 @@ function validarRegistro() {
     // Validar data de nascimento
     const hoje = new Date();
     const dataNasc = new Date(nascimento.value);
-    
+
     if (isNaN(dataNasc.getTime())) {
         nascimento.setCustomValidity("Data de nascimento inválida.");
         nascimento.reportValidity();
         return false;
     }
-    
+
     let idade = hoje.getFullYear() - dataNasc.getFullYear();
     const m = hoje.getMonth() - dataNasc.getMonth();
     if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {

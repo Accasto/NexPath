@@ -24,7 +24,9 @@
           type="email"
           placeholder="Email"
           required
-          oninvalid="this.setCustomValidity('Por favor, preencha um email válido.')"
+          oninvalid="
+            this.setCustomValidity('Por favor, preencha um email válido.')
+          "
           oninput="this.setCustomValidity('')"
         />
 
@@ -35,7 +37,11 @@
           placeholder="Senha"
           minlength="8"
           required
-          oninvalid="this.setCustomValidity('A senha precisa ter no mínimo 8 caracteres.')"
+          oninvalid="
+            this.setCustomValidity(
+              'A senha precisa ter no mínimo 8 caracteres.',
+            )
+          "
           oninput="this.setCustomValidity('')"
         />
 
