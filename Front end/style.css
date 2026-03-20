@@ -368,7 +368,8 @@ input {
 /* Link esqueci a senha */
 .forgot-link {
   font-size: 13px;
-  margin-top: 4px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .forgot-link a {
