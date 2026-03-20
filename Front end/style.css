@@ -269,3 +269,98 @@ input {
   margin-top: 0 !important;
   width: 100% !important;
 }
+
+/* ------------------------------------------
+   FORGOT PASSWORD — Abas de recuperação
+   ------------------------------------------ */
+
+.recovery-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 6px;
+  background: #0f172a;
+  color: #94a3b8;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: 0.2s;
+  border-radius: 0;
+  margin: 0;
+}
+
+.tab-btn.active {
+  background: #22c55e;
+  color: white;
+}
+
+.tab-btn:hover:not(.active) {
+  background: #1e293b;
+  color: white;
+}
+
+
+/* ------------------------------------------
+   FORGOT PASSWORD — Seções e card
+   ------------------------------------------ */
+
+.recovery-section {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recovery-section.active {
+  display: flex;
+}
+
+.recovery-card {
+  max-width: 420px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recovery-card p.desc {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0 0 8px 0;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.back-link a {
+  color: #22c55e;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}
+
+
+/* Mensagem de sucesso/erro */
+
+.success-msg {
+  display: none;
+  background: #14532d;
+  border: 1px solid #22c55e;
+  color: #bbf7d0;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
