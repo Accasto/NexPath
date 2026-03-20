@@ -165,32 +165,6 @@
     </div>
 
     <script src="script.js"></script>
-
-    <!-- localStorage temporário — remover quando conectar ao backend -->
-    <script>
-      function salvarUsuario() {
-        const ddd = document.getElementById("dddPais").value;
-        const telValor = document.getElementById("telefone").value.trim();
-        const usuarioValor = document.getElementById("usuario").value.trim();
-        const novoUsuario = {
-          nome: document.getElementById("nome").value.trim(),
-          usuario: usuarioValor.toLowerCase(),
-          email: document.getElementById("email").value.trim(),
-          telefone: ddd + telValor,
-          nascimento: document.getElementById("nascimento").value,
-        };
-        const usuarios = JSON.parse(
-          localStorage.getItem("nexpath_usuarios") || "[]",
-        );
-        usuarios.push(novoUsuario);
-        localStorage.setItem("nexpath_usuarios", JSON.stringify(usuarios));
-        alert(
-          "Conta criada com sucesso! Bem-vindo ao NexPath, @" +
-            usuarioValor +
-            "!",
-        );
-        window.location.href = "login.html";
-      }
-    </script>
+    <script src="register.js"></script>
   </body>
 </html>

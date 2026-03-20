@@ -1,3 +1,11 @@
+/* ==========================================
+   style.css — NexPath
+   ========================================== */
+
+/* ------------------------------------------
+   GLOBAL — Reset e base
+   ------------------------------------------ */
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,7 +13,9 @@ body {
   color: white;
 }
 
-/* Header e navegação */
+/* ------------------------------------------
+   GLOBAL — Header e navegação
+   ------------------------------------------ */
 
 header {
   display: flex;
@@ -34,7 +44,9 @@ nav a:hover {
   color: #22c55e;
 }
 
-/* Footer */
+/* ------------------------------------------
+   GLOBAL — Footer
+   ------------------------------------------ */
 
 footer {
   text-align: center;
@@ -43,7 +55,9 @@ footer {
   margin-top: 40px;
 }
 
-/* Inputs */
+/* ------------------------------------------
+   GLOBAL — Inputs
+   ------------------------------------------ */
 
 input {
   width: auto;
@@ -55,7 +69,9 @@ input {
   color: white;
 }
 
-/* Botão principal */
+/* ------------------------------------------
+   GLOBAL — Botão principal
+   ------------------------------------------ */
 
 .btn {
   display: inline-block;
@@ -74,7 +90,9 @@ input {
   background: #16a34a;
 }
 
-/* Cards */
+/* ------------------------------------------
+   GLOBAL — Cards
+   ------------------------------------------ */
 
 .card {
   background: #1e293b;
@@ -88,7 +106,9 @@ input {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* Popup (termos de uso) */
+/* ------------------------------------------
+   GLOBAL — Popup (termos de uso)
+   ------------------------------------------ */
 
 .popup {
   position: fixed;
@@ -122,7 +142,9 @@ input {
   color: #cbd5f5;
 }
 
-/* INDEX */
+/* ------------------------------------------
+   INDEX — Hero e container principal
+   ------------------------------------------ */
 
 .hero {
   text-align: center;
@@ -156,7 +178,9 @@ input {
   overflow-y: auto;
 }
 
-/* Card e botões sociais */
+/* ------------------------------------------
+   LOGIN — Card, links e botões sociais
+   ------------------------------------------ */
 
 .login-card {
   max-width: 400px;
@@ -164,6 +188,21 @@ input {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.forgot-link {
+  font-size: 13px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.forgot-link a {
+  color: #22c55e;
+  text-decoration: none;
+}
+
+.forgot-link a:hover {
+  text-decoration: underline;
 }
 
 .social-text {
@@ -198,7 +237,9 @@ input {
   height: 20px;
 }
 
-/* REGISTER (campo de formulario e se não funcionar eu me mato) */
+/* ------------------------------------------
+   REGISTER — Formulário de cadastro
+   ------------------------------------------ */
 
 .register-card {
   max-width: 400px;
@@ -239,7 +280,9 @@ input {
   margin-top: -4px;
 }
 
-/* REGISTER (telefone fi) */
+/* ------------------------------------------
+   REGISTER — Campo de telefone com DDD
+   ------------------------------------------ */
 
 .phone-row {
   display: flex;
@@ -307,7 +350,6 @@ input {
   color: white;
 }
 
-
 /* ------------------------------------------
    FORGOT PASSWORD — Seções e card
    ------------------------------------------ */
@@ -351,8 +393,9 @@ input {
   text-decoration: underline;
 }
 
-
-/* Mensagem de sucesso/erro */
+/* ------------------------------------------
+   FORGOT PASSWORD — Mensagem de sucesso/erro
+   ------------------------------------------ */
 
 .success-msg {
   display: none;
@@ -363,20 +406,4 @@ input {
   border-radius: 8px;
   font-size: 14px;
   text-align: center;
-}
-
-/* Link esqueci a senha */
-.forgot-link {
-  font-size: 13px;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.forgot-link a {
-  color: #22c55e;
-  text-decoration: none;
-}
-
-.forgot-link a:hover {
-  text-decoration: underline;
 }
