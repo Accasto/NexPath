@@ -364,3 +364,18 @@ input {
   font-size: 14px;
   text-align: center;
 }
+
+/* Link esqueci a senha */
+.forgot-link {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.forgot-link a {
+  color: #22c55e;
+  text-decoration: none;
+}
+
+.forgot-link a:hover {
+  text-decoration: underline;
+}
