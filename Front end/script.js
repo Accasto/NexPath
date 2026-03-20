@@ -1,8 +1,4 @@
-/* ==========================================
-   script.js — NexPath
-   Funções globais compartilhadas entre páginas
-   ========================================== */
-
+/* FUNÇÕES GLOBAIS */
 
 /* ------------------------------------------
    INDEX — Cálculo de saldo
