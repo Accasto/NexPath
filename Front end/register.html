@@ -5,42 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Criar conta - NexPath</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      .phone-row {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .ddd-select {
-        width: 130px;
-        flex-shrink: 0;
-        padding: 12px 8px;
-        margin-top: 0;
-        border-radius: 8px;
-        border: none;
-        background: #0f172a;
-        color: white;
-        font-size: 13px;
-        cursor: pointer;
-      }
-
-      .ddd-select option {
-        background: #0f172a;
-      }
-
-      .phone-input {
-        flex: 1;
-        margin-top: 0 !important;
-        width: 100% !important;
-      }
-
-      .field-hint {
-        font-size: 11px;
-        color: #64748b;
-        margin-top: -4px;
-      }
-    </style>
   </head>
 
   <body>
@@ -52,7 +16,6 @@
         id="registerForm"
         onsubmit="return validarRegistro();"
       >
-        <!-- Nome completo -->
         <input
           id="nome"
           name="nome"
@@ -60,10 +23,9 @@
           placeholder="Nome completo"
           required
           oninvalid="this.setCustomValidity('Por favor, preencha o nome.')"
-          oninput="this.setCustomValidity('')"
+          oninput="validarNomeInput(this)"
         />
 
-        <!-- Nome de usuário -->
         <input
           id="usuario"
           name="usuario"
@@ -82,7 +44,6 @@
           >Apenas letras, números e _ (sem espaços ou símbolos)</span
         >
 
-        <!-- Email -->
         <input
           id="email"
           name="email"
@@ -93,7 +54,6 @@
           oninput="this.setCustomValidity('')"
         />
 
-        <!-- Telefone com DDD -->
         <div class="phone-row">
           <select class="ddd-select" id="dddPais" name="dddPais">
             <option value="+55">🇧🇷 +55</option>
@@ -117,15 +77,15 @@
             id="telefone"
             name="telefone"
             type="tel"
-            placeholder="Número de telefone"
+            placeholder="DDD + número (ex: 11991234567)"
             inputmode="numeric"
             oninput="this.value = this.value.replace(/\D/g, '')"
+            maxlength="11"
             required
             oninvalid="this.setCustomValidity('Por favor, informe o telefone.')"
           />
         </div>
 
-        <!-- Senha -->
         <input
           id="senha"
           name="senha"
@@ -140,8 +100,10 @@
           "
           oninput="this.setCustomValidity('')"
         />
+        <span class="field-hint"
+          >Mínimo 8 caracteres, uma maiúscula, um número e um símbolo</span
+        >
 
-        <!-- Confirmar senha -->
         <input
           id="confirmarSenha"
           name="confirmarSenha"
@@ -152,7 +114,6 @@
           oninput="this.setCustomValidity('')"
         />
 
-        <!-- Data de nascimento -->
         <label class="birth-label" for="nascimento">Data de nascimento</label>
         <input
           id="nascimento"
@@ -165,7 +126,6 @@
           oninput="this.setCustomValidity('')"
         />
 
-        <!-- Termos -->
         <div class="terms">
           <input
             type="checkbox"
@@ -193,7 +153,6 @@
       </form>
     </section>
 
-    <!-- Popup termos -->
     <div id="popup-termos" class="popup">
       <div class="popup-content">
         <h2>Termos de Uso</h2>
@@ -206,176 +165,31 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- localStorage temporário — remover quando conectar ao backend -->
     <script>
-      // Valida nome de usuário em tempo real (só permite letras, números e _)
-      function validarUsuarioInput(input) {
-        const regex = /^[a-zA-Z0-9_]*$/;
-        if (!regex.test(input.value)) {
-          input.value = input.value.replace(/[^a-zA-Z0-9_]/g, "");
-          input.setCustomValidity(
-            "Use apenas letras, números e _ (underline).",
-          );
-          input.reportValidity();
-        } else {
-          input.setCustomValidity("");
-        }
-      }
-
-      // Sobrescreve validarRegistro do script.js pra incluir novos campos
-      function validarRegistro() {
-        let nome = document.getElementById("nome");
-        let usuario = document.getElementById("usuario");
-        let email = document.getElementById("email");
-        let telefone = document.getElementById("telefone");
-        let senha = document.getElementById("senha");
-        let confirmar = document.getElementById("confirmarSenha");
-        let nascimento = document.getElementById("nascimento");
-        let termos = document.getElementById("terms");
-
-        // Limpar validações
-        [
-          nome,
-          usuario,
-          email,
-          telefone,
-          senha,
-          confirmar,
-          nascimento,
-          termos,
-        ].forEach((el) => {
-          el.setCustomValidity("");
-        });
-
-        // Nome de usuário
-        const usuarioValor = usuario.value.trim();
-        if (!usuarioValor) {
-          usuario.setCustomValidity("Escolha um nome de usuário.");
-          usuario.reportValidity();
-          return false;
-        }
-        if (!/^[a-zA-Z0-9_]+$/.test(usuarioValor)) {
-          usuario.setCustomValidity(
-            "Use apenas letras, números e _ (underline).",
-          );
-          usuario.reportValidity();
-          return false;
-        }
-        if (usuarioValor.length < 3) {
-          usuario.setCustomValidity(
-            "Nome de usuário precisa ter pelo menos 3 caracteres.",
-          );
-          usuario.reportValidity();
-          return false;
-        }
-
-        // Telefone
-        const telValor = telefone.value.trim();
-        if (!telValor || telValor.length < 8) {
-          telefone.setCustomValidity("Digite um número de telefone válido.");
-          telefone.reportValidity();
-          return false;
-        }
-
-        // Senha
-        const senhaValor = senha.value;
-        if (!senhaValor || senhaValor.length < 8) {
-          senha.setCustomValidity(
-            "A senha precisa ter no mínimo 8 caracteres.",
-          );
-          senha.reportValidity();
-          return false;
-        }
-
-        const simbolos = "!@#$%^&*()_+-=[]{};\\':\\\",./<>?|\\`~";
-        let temSimbolo = false;
-        for (let i = 0; i < senhaValor.length; i++) {
-          if (simbolos.includes(senhaValor[i])) {
-            temSimbolo = true;
-            break;
-          }
-        }
-        if (!temSimbolo) {
-          senha.setCustomValidity(
-            "A senha precisa conter um símbolo! Exemplo: ! @ # $ % ^ & *",
-          );
-          senha.reportValidity();
-          return false;
-        }
-
-        if (/\s/.test(senhaValor)) {
-          senha.setCustomValidity("A senha não pode conter espaços.");
-          senha.reportValidity();
-          return false;
-        }
-
-        if (senhaValor !== confirmar.value) {
-          confirmar.setCustomValidity("As senhas não são iguais.");
-          confirmar.reportValidity();
-          return false;
-        }
-
-        // Data de nascimento
-        const hoje = new Date();
-        const dataNasc = new Date(nascimento.value);
-        if (isNaN(dataNasc.getTime())) {
-          nascimento.setCustomValidity("Data de nascimento inválida.");
-          nascimento.reportValidity();
-          return false;
-        }
-        let idade = hoje.getFullYear() - dataNasc.getFullYear();
-        const m = hoje.getMonth() - dataNasc.getMonth();
-        if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) idade--;
-        if (idade < 10) {
-          nascimento.setCustomValidity(
-            "É necessário ter pelo menos 10 anos para criar uma conta.",
-          );
-          nascimento.reportValidity();
-          return false;
-        }
-
-        // Termos
-        if (!termos.checked) {
-          termos.setCustomValidity("Você precisa aceitar os termos de uso.");
-          termos.reportValidity();
-          return false;
-        }
-
-        // Salva no localStorage (temporário até ter backend)
+      function salvarUsuario() {
         const ddd = document.getElementById("dddPais").value;
+        const telValor = document.getElementById("telefone").value.trim();
+        const usuarioValor = document.getElementById("usuario").value.trim();
         const novoUsuario = {
-          nome: nome.value.trim(),
+          nome: document.getElementById("nome").value.trim(),
           usuario: usuarioValor.toLowerCase(),
-          email: email.value.trim(),
+          email: document.getElementById("email").value.trim(),
           telefone: ddd + telValor,
-          nascimento: nascimento.value,
+          nascimento: document.getElementById("nascimento").value,
         };
-
         const usuarios = JSON.parse(
           localStorage.getItem("nexpath_usuarios") || "[]",
         );
-
-        // Checar duplicatas
-        if (usuarios.find((u) => u.email === novoUsuario.email)) {
-          email.setCustomValidity("Este email já está cadastrado.");
-          email.reportValidity();
-          return false;
-        }
-        if (usuarios.find((u) => u.usuario === novoUsuario.usuario)) {
-          usuario.setCustomValidity("Este nome de usuário já está em uso.");
-          usuario.reportValidity();
-          return false;
-        }
-
         usuarios.push(novoUsuario);
         localStorage.setItem("nexpath_usuarios", JSON.stringify(usuarios));
-
         alert(
           "Conta criada com sucesso! Bem-vindo ao NexPath, @" +
             usuarioValor +
             "!",
         );
         window.location.href = "login.html";
-        return false;
       }
     </script>
   </body>

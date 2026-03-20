@@ -5,6 +5,8 @@ body {
   color: white;
 }
 
+/* Header e navegação */
+
 header {
   display: flex;
   justify-content: space-between;
@@ -32,22 +34,28 @@ nav a:hover {
   color: #22c55e;
 }
 
-.hero {
+/* Footer */
+
+footer {
   text-align: center;
-  padding: 120px 20px;
-  max-width: 900px;
-  margin: auto;
+  padding: 20px;
+  background: #020617;
+  margin-top: 40px;
 }
 
-.hero h1 {
-  font-size: 52px;
-  margin-bottom: 20px;
+/* Inputs */
+
+input {
+  width: auto;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: white;
 }
 
-.hero p {
-  font-size: 20px;
-  color: #cbd5f5;
-}
+/* Botão principal */
 
 .btn {
   display: inline-block;
@@ -66,12 +74,7 @@ nav a:hover {
   background: #16a34a;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  padding: 60px 10%;
-}
+/* Cards */
 
 .card {
   background: #1e293b;
@@ -85,6 +88,66 @@ nav a:hover {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
+/* Popup (termos de uso) */
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: left;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content h2 {
+  margin-top: 0;
+}
+
+.popup-content p {
+  line-height: 1.5;
+  color: #cbd5f5;
+}
+
+/* INDEX */
+
+.hero {
+  text-align: center;
+  padding: 120px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 20px;
+  color: #cbd5f5;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 60px 10%;
+}
+
 .chat-box {
   height: 250px;
   background: #020617;
@@ -93,22 +156,7 @@ nav a:hover {
   overflow-y: auto;
 }
 
-input {
-  width: auto;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #0f172a;
-  color: white;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #020617;
-  margin-top: 40px;
-}
+/* Card e botões sociais */
 
 .login-card {
   max-width: 400px;
@@ -136,13 +184,11 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 10px;
-
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
   background: white;
   cursor: pointer;
-
   font-size: 14px;
   font-weight: 500;
 }
@@ -151,6 +197,8 @@ footer {
   width: 20px;
   height: 20px;
 }
+
+/* REGISTER (campo de formulario e se não funcionar eu me mato) */
 
 .register-card {
   max-width: 400px;
@@ -185,36 +233,39 @@ footer {
   text-decoration: underline;
 }
 
-/* POPUP TERMOS */
+.field-hint {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: -4px;
+}
 
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  justify-content: center;
+/* REGISTER (telefone fi) */
+
+.phone-row {
+  display: flex;
+  gap: 8px;
   align-items: center;
-  z-index: 1000;
 }
 
-.popup-content {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  text-align: left;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-.popup-content h2 {
+.ddd-select {
+  width: 130px;
+  flex-shrink: 0;
+  padding: 12px 8px;
   margin-top: 0;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
 }
 
-.popup-content p {
-  line-height: 1.5;
-  color: #cbd5f5;
+.ddd-select option {
+  background: #0f172a;
+}
+
+.phone-input {
+  flex: 1;
+  margin-top: 0 !important;
+  width: 100% !important;
 }

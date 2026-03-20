@@ -1,16 +1,14 @@
+/* calculo de saldo (index) */
+
 function calcular() {
-
-    let receita = document.getElementById("receita").value;
-    let despesas = document.getElementById("despesas").value;
-
-    receita = Number(receita);
-    despesas = Number(despesas);
-
+    let receita = Number(document.getElementById("receita").value);
+    let despesas = Number(document.getElementById("despesas").value);
     let saldo = receita - despesas;
-
     document.getElementById("saldo").innerText = saldo;
-
 }
+
+
+/* Popup com termos */
 
 function abrirTermos() {
     document.getElementById("popup-termos").style.display = "flex";
@@ -20,111 +18,155 @@ function fecharTermos() {
     document.getElementById("popup-termos").style.display = "none";
 }
 
+
+/* VALIDAÇÃO DE CAMPOS */
+
+// Nome completo: só aceita letras (incluindo acentos) e espaços
+function validarNomeInput(input) {
+    const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
+    if (!regex.test(input.value)) {
+        input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+        input.setCustomValidity('Use apenas letras e espaços.');
+        input.reportValidity();
+    } else {
+        input.setCustomValidity('');
+    }
+}
+
+// Nome de usuário: só aceita letras, números e underline
+function validarUsuarioInput(input) {
+    const regex = /^[a-zA-Z0-9_]*$/;
+    if (!regex.test(input.value)) {
+        input.value = input.value.replace(/[^a-zA-Z0-9_]/g, '');
+        input.setCustomValidity('Use apenas letras, números e _ (underline).');
+        input.reportValidity();
+    } else {
+        input.setCustomValidity('');
+    }
+}
+
+
+/* VALIDAÇÃO COMPLETA */
+
 function validarRegistro() {
+    const nome = document.getElementById("nome");
+    const usuario = document.getElementById("usuario");
+    const email = document.getElementById("email");
+    const telefone = document.getElementById("telefone");
+    const senha = document.getElementById("senha");
+    const confirmar = document.getElementById("confirmarSenha");
+    const nascimento = document.getElementById("nascimento");
+    const termos = document.getElementById("terms");
 
-    let nome = document.getElementById("nome");
-    let email = document.getElementById("email");
-    let senha = document.getElementById("senha");
-    let confirmar = document.getElementById("confirmarSenha");
-    let nascimento = document.getElementById("nascimento");
-    let termos = document.getElementById("terms");
+    // Limpar validações que vieram antes
+    [nome, usuario, email, telefone, senha, confirmar, nascimento, termos].forEach(el => {
+        el.setCustomValidity('');
+    });
 
-    // Limpar mensagens prévias
-    senha.setCustomValidity('');
-    confirmar.setCustomValidity('');
-    nascimento.setCustomValidity('');
-    termos.setCustomValidity('');
-
-    // Validações de senha
-    let senhaValor = senha.value;
-    if (senhaValor === "" || senhaValor.length < 8) {
-        senha.setCustomValidity("A senha precisa ter no mínimo 8 caracteres.");
-        senha.reportValidity();
+    // Nome de usuário
+    const usuarioValor = usuario.value.trim();
+    if (!usuarioValor) {
+        usuario.setCustomValidity('Escolha um nome de usuário.');
+        usuario.reportValidity();
+        return false;
+    }
+    if (!/^[a-zA-Z0-9_]+$/.test(usuarioValor)) {
+        usuario.setCustomValidity('Use apenas letras, números e _ (underline).');
+        usuario.reportValidity();
+        return false;
+    }
+    if (usuarioValor.length < 3) {
+        usuario.setCustomValidity('Nome de usuário precisa ter pelo menos 3 caracteres.');
+        usuario.reportValidity();
         return false;
     }
 
-    // Verificar se tem símbolo
-    let temSimbolo = false;
-    const simbolos = "!@#$%^&*()_+-=[]{};\':\",./<>?|\\`~";
-    for (let i = 0; i < senhaValor.length; i++) {
-        if (simbolos.includes(senhaValor[i])) {
-            temSimbolo = true;
-            break;
-        }
-    }
-    if (!temSimbolo) {
-        senha.setCustomValidity("A senha precisa conter um símbolo! Exemplo: ! @ # $ % ^ & * ( )");
-        senha.reportValidity();
+    // Telefone: DDD + (fixo de estado) + o numero de telefone
+    const telValor = telefone.value.trim();
+    if (!telValor || telValor.length < 10 || telValor.length > 11) {
+        telefone.setCustomValidity('Digite DDD + número. Ex: 11991234567');
+        telefone.reportValidity();
         return false;
     }
 
-    // Não permitir espaços
+    // Senha: mínimo 8 caracteres, uma maiúscula, um número e um símbolo
+    const senhaValor = senha.value;
+    if (!senhaValor || senhaValor.length < 8) {
+        senha.setCustomValidity('A senha precisa ter no mínimo 8 caracteres.');
+        senha.reportValidity();
+        return false;
+    }
+    if (!/[A-Z]/.test(senhaValor)) {
+        senha.setCustomValidity('A senha precisa ter pelo menos uma letra maiúscula.');
+        senha.reportValidity();
+        return false;
+    }
+    if (!/[0-9]/.test(senhaValor)) {
+        senha.setCustomValidity('A senha precisa ter pelo menos um número.');
+        senha.reportValidity();
+        return false;
+    }
+    if (!/[!@#$%^&*()\-_=+\[\]{};':",./<>?|`~\\]/.test(senhaValor)) {
+        senha.setCustomValidity('A senha precisa ter pelo menos um símbolo! Ex: ! @ # $ % ^ & *');
+        senha.reportValidity();
+        return false;
+    }
     if (/\s/.test(senhaValor)) {
-        senha.setCustomValidity("A senha não pode conter espaços.");
+        senha.setCustomValidity('A senha não pode conter espaços.');
         senha.reportValidity();
         return false;
     }
-
-    // Validar confirmação de senha
     if (senhaValor !== confirmar.value) {
-        confirmar.setCustomValidity("As senhas não são iguais.");
+        confirmar.setCustomValidity('As senhas não são iguais.');
         confirmar.reportValidity();
         return false;
     }
 
-    // Verificar campos obrigatórios
-    if (nome.value.trim() === "" || email.value.trim() === "" || confirmar.value === "" || nascimento.value === "") {
-        if (nome.value.trim() === "") nome.reportValidity();
-        else if (email.value.trim() === "") email.reportValidity();
-        else if (confirmar.value === "") confirmar.reportValidity();
-        else if (nascimento.value === "") nascimento.reportValidity();
-        return false;
-    }
-
-    // Validar email
-    if (!email.value.includes("@")) {
-        email.setCustomValidity("Digite um email válido.");
-        email.reportValidity();
-        return false;
-    }
-
-    // Validar data de nascimento
+    // Data de nascimento: mínimo 10 anos
     const hoje = new Date();
     const dataNasc = new Date(nascimento.value);
-
     if (isNaN(dataNasc.getTime())) {
-        nascimento.setCustomValidity("Data de nascimento inválida.");
+        nascimento.setCustomValidity('Data de nascimento inválida.');
         nascimento.reportValidity();
         return false;
     }
-
     let idade = hoje.getFullYear() - dataNasc.getFullYear();
     const m = hoje.getMonth() - dataNasc.getMonth();
-    if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {
-        idade--;
-    }
+    if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) idade--;
     if (idade < 10) {
-        nascimento.setCustomValidity("É necessário ter pelo menos 10 anos para criar uma conta.");
+        nascimento.setCustomValidity('É necessário ter pelo menos 10 anos para criar uma conta.');
         nascimento.reportValidity();
         return false;
     }
 
-    // Validar termos
+    // Termos de uso
     if (!termos.checked) {
-        termos.setCustomValidity("Você precisa aceitar os termos de uso.");
+        termos.setCustomValidity('Você precisa aceitar os termos de uso.');
         termos.reportValidity();
         return false;
     }
 
-    // Se passou em todas as validações
-    alert("Cadastro válido!");
-    return true;
+    // ver se tem double user
+    const usuarios = JSON.parse(localStorage.getItem('nexpath_usuarios') || '[]');
+    if (usuarios.find(u => u.email === email.value.trim())) {
+        email.setCustomValidity('Este email já está cadastrado.');
+        email.reportValidity();
+        return false;
+    }
+    if (usuarios.find(u => u.usuario === usuarioValor.toLowerCase())) {
+        usuario.setCustomValidity('Este nome de usuário já está em uso.');
+        usuario.reportValidity();
+        return false;
+    }
 
+    // save por localstorage
+    salvarUsuario();
+    return false;
 }
 
-/* login */
 
-// set up listeners when DOM is ready
+/* confirmação da senha */
+
 if (document.readyState !== 'loading') {
     setupListeners();
 } else {
@@ -148,8 +190,10 @@ function setupListeners() {
     }
 }
 
-function validarLogin() {
 
+/* validção (funciona pfvr) */
+
+function validarLogin() {
     let email = document.getElementById("loginEmail").value.trim();
     let senha = document.getElementById("loginSenha").value;
 
@@ -157,18 +201,16 @@ function validarLogin() {
         alert("Preencha email e senha.");
         return false;
     }
-
     if (!email.includes("@")) {
         alert("Digite um email válido.");
         return false;
     }
-
     if (senha.length < 8) {
         alert("A senha precisa ter no mínimo 8 caracteres.");
         return false;
     }
 
+    // TODO: conectar ao backend para autenticação real
     alert("Login válido (backend ainda não conectado)");
     return true;
-
 }
