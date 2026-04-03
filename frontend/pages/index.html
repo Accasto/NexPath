@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexPath - Assistente Financeiro</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">NexPath</div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Recursos</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#">Contato</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1 class="fade-in-1">
+        Controle seu dinheiro com o <span class="nexlos-brand">Nexlos</span>
+      </h1>
+
+      <p class="fade-in-2">
+        Uma inteligência artificial que analisa seus gastos, cria gráficos,
+        organiza sua rotina e te ajuda a manter sua conta positiva.
+      </p>
+
+      <a class="btn fade-in-3" href="login.html">Começar Agora</a>
+    </section>
+
+    <section class="container">
+      <div class="card fade-in-3">
+        <h2>
+          Assistente
+          <span class="nexlos-brand" style="font-size: 13px">Nexlos</span>
+        </h2>
+
+        <div class="chat-box">
+          <p>
+            <strong>Nexlos:</strong> Olá! Como posso ajudar com suas finanças
+            hoje?
+          </p>
+        </div>
+
+        <input type="text" placeholder="Digite sua pergunta..." />
+      </div>
+
+      <div class="card fade-in-4">
+        <h2>Resumo Financeiro</h2>
+
+        <p>
+          Receita mensal: R$
+          <input type="number" id="receita" placeholder="0,00" />
+        </p>
+        <p>
+          Despesas: R$ <input type="number" id="despesas" placeholder="0,00" />
+        </p>
+        <p>Saldo: R$ <span id="saldo">0</span></p>
+
+        <button onclick="calcular()">Calcular saldo</button>
+
+        <canvas id="grafico"></canvas>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        © 2026
+        <span class="nexpath-brand" style="font-size: 13px">NexPath</span> —
+        Assistente Financeiro by
+        <span class="nexlos-brand" style="font-size: 13px">Nexlos</span>. Todos
+        os direitos reservados.
+      </p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>
