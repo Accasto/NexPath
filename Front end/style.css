@@ -1,16 +1,141 @@
 /* ==========================================
    style.css — NexPath
+   Visual: Tech / Fintech — Azul escuro → Preto
    ========================================== */
+
+/* ------------------------------------------
+   GLOBAL — Variáveis de cor e fonte
+   ------------------------------------------ */
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg-deep: #000510;
+  --bg-dark: #020c1b;
+  --bg-mid: #071428;
+  --blue-bright: #38bdf8;
+  --blue-mid: #0ea5e9;
+  --blue-dim: #0c4a6e;
+  --cyan-neon: #00f5d4;
+  --cyan-dim: #00b896;
+  --text-main: #e2e8f0;
+  --text-dim: #64748b;
+  --text-muted: #334155;
+  --card-bg: rgba(7, 20, 40, 0.7);
+  --card-border: rgba(56, 189, 248, 0.15);
+  --card-glow: rgba(56, 189, 248, 0.08);
+}
 
 /* ------------------------------------------
    GLOBAL — Reset e base
    ------------------------------------------ */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0f172a;
-  color: white;
+  font-family: "Syne", sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* Fundo com gradiente azul → preto */
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% -10%,
+      rgba(14, 165, 233, 0.18) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 80%,
+      rgba(0, 245, 212, 0.06) 0%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, #020c1b 0%, #000510 60%, #000000 100%);
+}
+
+/* Grade de pontos sutil no fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(56, 189, 248, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ------------------------------------------
+   GLOBAL — Animações de fade in
+   ------------------------------------------ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 20px rgba(56, 189, 248, 0.5),
+      0 0 40px rgba(56, 189, 248, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(56, 189, 248, 0.8),
+      0 0 60px rgba(56, 189, 248, 0.4);
+  }
+}
+
+@keyframes borderGlow {
+  0%,
+  100% {
+    border-color: rgba(56, 189, 248, 0.15);
+  }
+  50% {
+    border-color: rgba(56, 189, 248, 0.4);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.7s ease both;
+}
+
+.fade-in-1 {
+  animation: fadeInUp 0.7s ease 0.1s both;
+}
+.fade-in-2 {
+  animation: fadeInUp 0.7s ease 0.25s both;
+}
+.fade-in-3 {
+  animation: fadeInUp 0.7s ease 0.4s both;
+}
+.fade-in-4 {
+  animation: fadeInUp 0.7s ease 0.55s both;
 }
 
 /* ------------------------------------------
@@ -18,30 +143,44 @@ body {
    ------------------------------------------ */
 
 header {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 10%;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
+  padding: 20px 8%;
+  background: rgba(2, 12, 27, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+  animation: fadeIn 0.6s ease both;
 }
 
+/* Logo NexPath — fonte tech com glow */
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #22c55e;
+  font-family: "Orbitron", monospace;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--blue-bright);
+  animation: glowPulse 3s ease-in-out infinite;
+  text-decoration: none;
 }
 
 nav a {
-  margin-left: 25px;
+  margin-left: 28px;
   text-decoration: none;
-  color: #cbd5f5;
+  color: var(--text-dim);
   font-weight: 500;
-  transition: 0.3s;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition:
+    color 0.3s,
+    text-shadow 0.3s;
 }
 
 nav a:hover {
-  color: #22c55e;
+  color: var(--blue-bright);
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
 }
 
 /* ------------------------------------------
@@ -49,24 +188,49 @@ nav a:hover {
    ------------------------------------------ */
 
 footer {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  padding: 20px;
-  background: #020617;
-  margin-top: 40px;
+  padding: 28px 20px;
+  background: rgba(2, 12, 27, 0.9);
+  border-top: 1px solid rgba(56, 189, 248, 0.08);
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-top: 60px;
 }
 
 /* ------------------------------------------
    GLOBAL — Inputs
    ------------------------------------------ */
 
-input {
-  width: auto;
-  padding: 12px;
-  margin-top: 10px;
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 8px;
   border-radius: 8px;
-  border: none;
-  background: #0f172a;
-  color: white;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  background: rgba(2, 12, 27, 0.8);
+  color: var(--text-main);
+  font-family: "Syne", sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+input::placeholder {
+  color: var(--text-dim);
 }
 
 /* ------------------------------------------
@@ -75,35 +239,54 @@ input {
 
 .btn {
   display: inline-block;
-  margin-top: 30px;
-  padding: 14px 32px;
-  background: #22c55e;
-  color: white;
-  border-radius: 10px;
+  margin-top: 20px;
+  padding: 13px 32px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--cyan-neon));
+  color: #000;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    opacity 0.25s;
+  box-shadow: 0 4px 20px rgba(0, 245, 212, 0.25);
 }
 
 .btn:hover {
-  transform: translateY(-3px);
-  background: #16a34a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 245, 212, 0.4);
+  opacity: 0.95;
 }
 
 /* ------------------------------------------
-   GLOBAL — Cards
+   GLOBAL — Cards com glassmorphism
    ------------------------------------------ */
 
 .card {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 12px;
-  transition: 0.3s;
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+  animation: borderGlow 4s ease-in-out infinite;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 48px rgba(56, 189, 248, 0.12),
+    0 0 0 1px rgba(56, 189, 248, 0.2);
 }
 
 /* ------------------------------------------
@@ -112,11 +295,9 @@ input {
 
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(0, 5, 16, 0.85);
+  backdrop-filter: blur(8px);
   display: none;
   justify-content: center;
   align-items: center;
@@ -124,22 +305,28 @@ input {
 }
 
 .popup-content {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px);
+  padding: 36px;
+  border-radius: 16px;
   max-width: 500px;
   width: 90%;
   text-align: left;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 60px rgba(56, 189, 248, 0.1);
+  animation: fadeInUp 0.4s ease both;
 }
 
 .popup-content h2 {
   margin-top: 0;
+  font-family: "Orbitron", monospace;
+  color: var(--blue-bright);
+  font-size: 18px;
 }
 
 .popup-content p {
-  line-height: 1.5;
-  color: #cbd5f5;
+  line-height: 1.6;
+  color: var(--text-dim);
 }
 
 /* ------------------------------------------
@@ -147,35 +334,101 @@ input {
    ------------------------------------------ */
 
 .hero {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  padding: 120px 20px;
-  max-width: 900px;
+  padding: 130px 20px 80px;
+  max-width: 860px;
   margin: auto;
 }
 
+/* Nome NexPath e Nexlos em destaque tech */
 .hero h1 {
+  font-family: "Syne", sans-serif;
   font-size: 52px;
-  margin-bottom: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  line-height: 1.15;
+  color: var(--text-main);
+}
+
+.hero h1 .brand-nexlos {
+  font-family: "Orbitron", monospace;
+  color: var(--cyan-neon);
+  text-shadow: 0 0 20px rgba(0, 245, 212, 0.6);
 }
 
 .hero p {
-  font-size: 20px;
-  color: #cbd5f5;
+  font-size: 18px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  padding: 60px 10%;
+  gap: 32px;
+  padding: 20px 8% 80px;
 }
 
 .chat-box {
-  height: 250px;
-  background: #020617;
+  height: 220px;
+  background: rgba(0, 5, 16, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.1);
   border-radius: 10px;
-  padding: 15px;
+  padding: 16px;
   overflow-y: auto;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.chat-box strong {
+  color: var(--cyan-neon);
+}
+
+.card h2 {
+  font-family: "Orbitron", monospace;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--blue-bright);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.card p {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+#saldo {
+  color: var(--cyan-neon);
+  font-weight: 700;
+}
+
+/* Botão calcular dentro do card */
+.card button:not(.btn) {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--blue-bright);
+  color: var(--blue-bright);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Syne", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.card button:not(.btn):hover {
+  background: var(--blue-bright);
+  color: #000;
 }
 
 /* ------------------------------------------
@@ -183,39 +436,63 @@ input {
    ------------------------------------------ */
 
 .login-card {
-  max-width: 400px;
+  max-width: 420px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .forgot-link {
   font-size: 13px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 4px;
+  text-align: right;
 }
 
 .forgot-link a {
-  color: #22c55e;
+  color: var(--blue-bright);
   text-decoration: none;
+  transition: color 0.3s;
 }
 
 .forgot-link a:hover {
+  color: var(--cyan-neon);
   text-decoration: underline;
 }
 
+.register-link {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.register-link a {
+  color: var(--cyan-neon);
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(56, 189, 248, 0.1);
+  margin: 8px 0;
+}
+
 .social-text {
-  margin-top: 3px;
-  font-size: 14px;
-  opacity: 0.8;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+  margin: 4px 0;
 }
 
 .social-login {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 5px;
 }
 
 .social-btn {
@@ -223,18 +500,28 @@ input {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background: white;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(7, 20, 40, 0.6);
+  color: var(--text-main);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
+  font-family: "Syne", sans-serif;
   font-weight: 500;
+  transition:
+    border-color 0.3s,
+    background 0.3s;
+}
+
+.social-btn:hover {
+  border-color: var(--blue-bright);
+  background: rgba(56, 189, 248, 0.08);
 }
 
 .social-btn img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 /* ------------------------------------------
@@ -242,41 +529,53 @@ input {
    ------------------------------------------ */
 
 .register-card {
-  max-width: 400px;
+  max-width: 420px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .birth-label {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-top: 5px;
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
 }
 
 .login-link {
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.login-link a {
+  color: var(--cyan-neon);
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }
 
 .terms {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
 }
 
 .terms-link {
-  color: #22c55e;
+  color: var(--blue-bright);
   cursor: pointer;
   text-decoration: underline;
 }
 
 .field-hint {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   margin-top: -4px;
 }
 
@@ -296,15 +595,22 @@ input {
   padding: 12px 8px;
   margin-top: 0;
   border-radius: 8px;
-  border: none;
-  background: #0f172a;
-  color: white;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  background: rgba(2, 12, 27, 0.8);
+  color: var(--text-main);
+  font-family: "Syne", sans-serif;
   font-size: 13px;
   cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.ddd-select:focus {
+  border-color: var(--blue-bright);
 }
 
 .ddd-select option {
-  background: #0f172a;
+  background: var(--bg-dark);
 }
 
 .phone-input {
@@ -323,31 +629,34 @@ input {
   margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #334155;
 }
 
 .tab-btn {
   flex: 1;
   padding: 10px 6px;
-  background: #0f172a;
-  color: #94a3b8;
+  background: rgba(2, 12, 27, 0.8);
+  color: var(--text-dim);
   border: none;
   cursor: pointer;
   font-size: 12px;
+  font-family: "Syne", sans-serif;
   font-weight: 500;
-  transition: 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   border-radius: 0;
   margin: 0;
 }
 
 .tab-btn.active {
-  background: #22c55e;
-  color: white;
+  background: linear-gradient(135deg, var(--blue-mid), var(--cyan-neon));
+  color: #000;
+  font-weight: 700;
 }
 
 .tab-btn:hover:not(.active) {
-  background: #1e293b;
-  color: white;
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--blue-bright);
 }
 
 /* ------------------------------------------
@@ -365,7 +674,7 @@ input {
 }
 
 .recovery-card {
-  max-width: 420px;
+  max-width: 440px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -374,22 +683,23 @@ input {
 
 .recovery-card p.desc {
   font-size: 14px;
-  color: #94a3b8;
+  color: var(--text-dim);
   margin: 0 0 8px 0;
 }
 
 .back-link {
   text-align: center;
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .back-link a {
-  color: #22c55e;
+  color: var(--blue-bright);
   text-decoration: none;
 }
 
 .back-link a:hover {
+  color: var(--cyan-neon);
   text-decoration: underline;
 }
 
@@ -399,11 +709,29 @@ input {
 
 .success-msg {
   display: none;
-  background: #14532d;
-  border: 1px solid #22c55e;
-  color: #bbf7d0;
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid var(--cyan-neon);
+  color: var(--cyan-neon);
   padding: 12px;
   border-radius: 8px;
   font-size: 14px;
   text-align: center;
+}
+
+/* ------------------------------------------
+   HERO — Título com nome da marca em destaque
+   ------------------------------------------ */
+
+.nexpath-brand {
+  font-family: "Orbitron", monospace;
+  color: var(--blue-bright);
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.nexlos-brand {
+  font-family: "Orbitron", monospace;
+  color: var(--cyan-neon);
+  text-shadow: 0 0 20px rgba(0, 245, 212, 0.6);
+  animation: glowPulse 3s ease-in-out infinite 0.5s;
 }

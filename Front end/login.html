@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Login - NexPath</title>
-
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <section class="hero">
-      <h1>Entrar no NexPath</h1>
+    <section class="hero" style="padding-top: 80px">
+      <h1 class="fade-in-1" style="font-size: 36px">
+        Entrar no <span class="nexpath-brand">NexPath</span>
+      </h1>
 
       <form
-        class="card login-card"
+        class="card login-card fade-in-2"
         id="loginForm"
         onsubmit="return validarLogin();"
       >
@@ -60,21 +60,18 @@
         <p class="social-text">Ou continue com</p>
 
         <div class="social-login">
-          <button class="social-btn">
+          <button class="social-btn" type="button">
             <img src="icons/Google.svg" alt="Google" />
-
             Entrar com Google
           </button>
 
-          <button class="social-btn">
+          <button class="social-btn" type="button">
             <img src="icons/Microsoft.svg" alt="Microsoft" />
-
             Entrar com Microsoft
           </button>
 
-          <button class="social-btn">
+          <button class="social-btn" type="button">
             <img src="icons/Github.svg" alt="GitHub" />
-
             Entrar com GitHub
           </button>
         </div>

@@ -26,7 +26,7 @@ function trocarAba(aba) {
 
 
 /* ------------------------------------------
-   Recuperação de conta
+   Recuperação de conta DESGRAÇAAAAAAAA DEE CÓDIGO
    ------------------------------------------ */
 
 function recuperarPor(metodo) {
