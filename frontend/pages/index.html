@@ -14,7 +14,8 @@
         <a href="#">Home</a>
         <a href="#features">Recursos</a>
         <a href="#quote">Filosofia</a>
-        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html" class="nav-btn-outline">Login</a>
+        <a href="register.html" class="nav-btn">Cadastrar-se</a>
       </nav>
     </header>
 
@@ -29,7 +30,7 @@
         Uma inteligência artificial que analisa seus gastos, organiza sua rotina
         e te ajuda a construir hábitos financeiros sólidos.
       </p>
-      <a class="btn fade-in-4" href="login.html">Começar Agora →</a>
+      <a class="btn fade-in-4" href="register.html">Começar Agora →</a>
     </section>
 
     <!-- FEATURES -->
@@ -118,68 +119,6 @@
           aqui para te ajudar a construí-la, um dia de cada vez.
         </p>
       </div>
-    </section>
-
-    <!-- DEMO -->
-    <section class="demo-section">
-      <div class="demo-header reveal">
-        <h2>Veja o <span class="nexlos-brand">Nexlos</span> em ação</h2>
-        <p>Experimente o assistente e o resumo financeiro agora mesmo.</p>
-      </div>
-
-      <div class="container">
-        <div class="card reveal">
-          <h2>Assistente Nexlos</h2>
-          <div class="chat-box" id="chatBox">
-            <p>
-              <strong>Nexlos:</strong> Olá! Como posso ajudar com suas finanças
-              hoje?
-            </p>
-          </div>
-          <div class="chat-input-row">
-            <input
-              type="text"
-              id="chatInput"
-              placeholder="Digite sua pergunta..."
-              onkeydown="enviarChat(event)"
-            />
-            <button class="chat-send-btn" onclick="enviarChat()">→</button>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <h2>Resumo Financeiro</h2>
-          <div class="finance-row">
-            <label>Receita mensal</label>
-            <div class="finance-input-wrap">
-              <span class="currency">R$</span>
-              <input type="number" id="receita" placeholder="0,00" />
-            </div>
-          </div>
-          <div class="finance-row">
-            <label>Despesas</label>
-            <div class="finance-input-wrap">
-              <span class="currency">R$</span>
-              <input type="number" id="despesas" placeholder="0,00" />
-            </div>
-          </div>
-          <div class="finance-saldo">
-            <span>Saldo</span>
-            <span class="saldo-valor">R$ <span id="saldo">0</span></span>
-          </div>
-          <button onclick="calcular()">Calcular saldo</button>
-          <canvas id="grafico"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section class="cta-section reveal">
-      <h2>Pronto para transformar sua relação com o dinheiro?</h2>
-      <p>
-        Junte-se ao NexPath e comece a construir disciplina financeira hoje.
-      </p>
-      <a class="btn" href="register.html">Criar conta grátis →</a>
     </section>
 
     <footer>

@@ -1,3 +1,8 @@
+/* ==========================================
+   style.css — NexPath
+   Visual: Tech / Fintech — Azul escuro → Preto
+   ========================================== */
+
 /* ------------------------------------------
    GLOBAL — Variáveis de cor e fonte
    ------------------------------------------ */
@@ -18,7 +23,6 @@
   --text-muted: #334155;
   --card-bg: rgba(7, 20, 40, 0.7);
   --card-border: rgba(56, 189, 248, 0.15);
-  --card-glow: rgba(56, 189, 248, 0.08);
 }
 
 /* ------------------------------------------
@@ -37,32 +41,15 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
-  background:
-    radial-gradient(
-      ellipse 80% 60% at 50% -10%,
-      rgba(14, 165, 233, 0.18) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 60% 40% at 100% 80%,
-      rgba(0, 245, 212, 0.06) 0%,
-      transparent 60%
-    ),
-    linear-gradient(180deg, #020c1b 0%, #000510 60%, #000000 100%);
+  background: linear-gradient(180deg, #020c1b 0%, #000510 60%, #000000 100%);
 }
 
-/* Grade de pontos sutil no fundo */
-body::before {
-  content: "";
+/* Canvas de partículas — fundo animado */
+#particles-canvas {
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(
-    rgba(56, 189, 248, 0.08) 1px,
-    transparent 1px
-  );
-  background-size: 32px 32px;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
 }
 
 /* ------------------------------------------
@@ -113,7 +100,6 @@ body::before {
   }
 }
 
-/* Fade in no carregamento da página */
 .fade-in {
   animation: fadeInUp 0.7s ease both;
 }
@@ -132,8 +118,6 @@ body::before {
 
 /* ------------------------------------------
    GLOBAL — Scroll Reveal
-   Elementos com .reveal ficam invisíveis até
-   entrar na tela — o JS adiciona .revealed
    ------------------------------------------ */
 
 .reveal {
@@ -162,8 +146,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 8%;
-  background: rgba(2, 12, 27, 0.9);
+  padding: 16px 8%;
+  background: rgba(2, 12, 27, 0.92);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(56, 189, 248, 0.1);
   animation: fadeIn 0.6s ease both;
@@ -179,13 +163,20 @@ header {
   text-decoration: none;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 nav a {
-  margin-left: 28px;
+  padding: 6px 14px;
   text-decoration: none;
   color: var(--text-dim);
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 0.5px;
+  border-radius: 6px;
   transition:
     color 0.3s,
     text-shadow 0.3s;
@@ -194,6 +185,41 @@ nav a {
 nav a:hover {
   color: var(--blue-bright);
   text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+/* Botão outline — Login */
+nav a.nav-btn-outline {
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: var(--blue-bright);
+  margin-left: 8px;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+
+nav a.nav-btn-outline:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: var(--blue-bright);
+  text-shadow: none;
+}
+
+/* Botão sólido — Cadastrar-se */
+nav a.nav-btn {
+  background: linear-gradient(135deg, var(--blue-mid), var(--cyan-neon));
+  color: #000;
+  font-weight: 700;
+  margin-left: 4px;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+  box-shadow: 0 2px 12px rgba(0, 245, 212, 0.2);
+}
+
+nav a.nav-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(0, 245, 212, 0.35);
+  text-shadow: none;
+  color: #000;
 }
 
 /* ------------------------------------------
@@ -266,15 +292,13 @@ input::placeholder {
   cursor: pointer;
   transition:
     transform 0.25s,
-    box-shadow 0.25s,
-    opacity 0.25s;
+    box-shadow 0.25s;
   box-shadow: 0 4px 20px rgba(0, 245, 212, 0.25);
 }
 
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(0, 245, 212, 0.4);
-  opacity: 0.95;
 }
 
 /* ------------------------------------------
@@ -283,6 +307,7 @@ input::placeholder {
 
 .card {
   position: relative;
+  z-index: 1;
   background: var(--card-bg);
   backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
@@ -316,7 +341,7 @@ input::placeholder {
   font-size: 14px;
 }
 
-.card button:not(.btn):not(.chat-send-btn) {
+.card button:not(.btn) {
   margin-top: 12px;
   padding: 10px 20px;
   background: transparent;
@@ -332,7 +357,7 @@ input::placeholder {
     color 0.3s;
 }
 
-.card button:not(.btn):not(.chat-send-btn):hover {
+.card button:not(.btn):hover {
   background: var(--blue-bright);
   color: #000;
 }
@@ -568,31 +593,8 @@ input::placeholder {
 }
 
 /* ------------------------------------------
-   INDEX — Seção demo (container cards)
+   INDEX — Container (grid de cards)
    ------------------------------------------ */
-
-.demo-section {
-  position: relative;
-  z-index: 1;
-  padding: 80px 0 20px;
-}
-
-.demo-header {
-  text-align: center;
-  margin-bottom: 48px;
-  padding: 0 8%;
-}
-
-.demo-header h2 {
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.demo-header p {
-  color: var(--text-dim);
-  font-size: 15px;
-}
 
 .container {
   position: relative;
@@ -601,143 +603,6 @@ input::placeholder {
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   padding: 0 8% 80px;
-}
-
-/* Chat */
-.chat-box {
-  height: 200px;
-  background: rgba(0, 5, 16, 0.6);
-  border: 1px solid rgba(56, 189, 248, 0.1);
-  border-radius: 10px;
-  padding: 14px 16px;
-  overflow-y: auto;
-  font-size: 13px;
-  color: var(--text-dim);
-  margin-bottom: 12px;
-}
-
-.chat-box p {
-  margin: 6px 0;
-  color: var(--text-dim);
-  font-size: 13px;
-}
-
-.chat-input-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.chat-input-row input {
-  flex: 1;
-  margin-top: 0;
-}
-
-.chat-send-btn {
-  padding: 12px 16px;
-  background: linear-gradient(135deg, var(--blue-mid), var(--cyan-neon));
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-}
-
-.chat-send-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 245, 212, 0.3);
-}
-
-/* Resumo financeiro */
-.finance-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.finance-row label {
-  font-size: 13px;
-  color: var(--text-dim);
-}
-
-.finance-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.currency {
-  color: var(--text-dim);
-  font-size: 13px;
-}
-
-.finance-input-wrap input {
-  width: 130px;
-  margin-top: 0;
-  padding: 8px 12px;
-  font-size: 13px;
-}
-
-.finance-saldo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-top: 1px solid rgba(56, 189, 248, 0.1);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-  margin: 12px 0;
-}
-
-.finance-saldo span:first-child {
-  font-size: 13px;
-  color: var(--text-dim);
-}
-
-.saldo-valor {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--cyan-neon);
-}
-
-#saldo {
-  color: inherit;
-  font-weight: 700;
-}
-
-/* ------------------------------------------
-   INDEX — CTA final
-   ------------------------------------------ */
-
-.cta-section {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 80px 20px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(14, 165, 233, 0.05) 50%,
-    transparent 100%
-  );
-  border-top: 1px solid rgba(56, 189, 248, 0.06);
-}
-
-.cta-section h2 {
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--text-main);
-}
-
-.cta-section p {
-  color: var(--text-dim);
-  font-size: 16px;
-  margin-bottom: 0;
 }
 
 /* ------------------------------------------
@@ -889,7 +754,7 @@ hr {
 }
 
 /* ------------------------------------------
-   REGISTER — Campo de telefone com DDD
+   REGISTER — Telefone com DDD
    ------------------------------------------ */
 
 .phone-row {
@@ -929,12 +794,11 @@ hr {
 }
 
 /* ------------------------------------------
-   FORGOT PASSWORD — Abas de recuperação
+   FORGOT PASSWORD — Abas
    ------------------------------------------ */
 
 .recovery-tabs {
   display: flex;
-  gap: 0;
   margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
@@ -968,10 +832,6 @@ hr {
   background: rgba(56, 189, 248, 0.08);
   color: var(--blue-bright);
 }
-
-/* ------------------------------------------
-   FORGOT PASSWORD — Seções e card
-   ------------------------------------------ */
 
 .recovery-section {
   display: none;
@@ -1013,10 +873,6 @@ hr {
   text-decoration: underline;
 }
 
-/* ------------------------------------------
-   FORGOT PASSWORD — Mensagem de sucesso/erro
-   ------------------------------------------ */
-
 .success-msg {
   display: none;
   background: rgba(0, 245, 212, 0.08);
@@ -1029,7 +885,7 @@ hr {
 }
 
 /* ------------------------------------------
-   GLOBAL — Nomes das marcas em destaque
+   GLOBAL — Nomes das marcas
    ------------------------------------------ */
 
 .nexpath-brand {

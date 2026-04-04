@@ -3,35 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Dashboard - NexPath</title>
-
     <link rel="stylesheet" href="../css/style.css" />
   </head>
 
   <body>
     <header>
       <div class="logo">NexPath</div>
-
       <nav>
+        <a href="index.html">Home</a>
         <a href="#">Dashboard</a>
-        <a href="#">Gastos</a>
-        <a href="#">Perfil</a>
+        <a href="#" id="nav-usuario"></a>
+        <a href="#" onclick="logout()" class="nav-btn-outline">Sair</a>
       </nav>
     </header>
 
-    <section class="container">
-      <div class="card">
-        <h2>Saldo atual</h2>
+    <section class="hero" style="padding-top: 160px">
+      <h1 class="fade-in-1" style="font-size: 36px">
+        Dashboard — <span class="nexpath-brand">NexPath</span>
+      </h1>
+      <p class="fade-in-2">
+        Em breve: suas finanças, hábitos e relatórios em um só lugar.
+      </p>
+    </section>
 
-        <p>R$ 0</p>
+    <section class="container fade-in-3">
+      <div class="card">
+        <h2>Saldo Atual</h2>
+        <p
+          style="
+            font-size: 28px;
+            color: var(--cyan-neon);
+            font-weight: 700;
+            margin: 16px 0;
+          "
+        >
+          R$ 0,00
+        </p>
+        <p>Conecte ao backend para ver seu saldo real.</p>
       </div>
 
       <div class="card">
-        <h2>Últimas transações</h2>
-
-        <p>Nenhuma transação ainda</p>
+        <h2>Últimas Transações</h2>
+        <p>
+          Nenhuma transação ainda.<br />O histórico aparecerá aqui após a
+          integração com o banco de dados.
+        </p>
       </div>
     </section>
+
+    <script src="../js/script.js"></script>
+    <script>
+      /* ------------------------------------------
+         Verificação de login — temporária
+         Substituir pela verificação real do backend
+         ------------------------------------------ */
+      (function () {
+        const usuario = localStorage.getItem("nexpath_logado");
+        if (!usuario) {
+          window.location.href = "login.html";
+        } else {
+          const el = document.getElementById("nav-usuario");
+          if (el) el.textContent = "@" + usuario;
+        }
+      })();
+
+      function logout() {
+        localStorage.removeItem("nexpath_logado");
+        window.location.href = "login.html";
+      }
+    </script>
   </body>
 </html>
