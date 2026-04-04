@@ -12,58 +12,174 @@
       <div class="logo">NexPath</div>
       <nav>
         <a href="#">Home</a>
-        <a href="#">Recursos</a>
+        <a href="#features">Recursos</a>
+        <a href="#quote">Filosofia</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="#">Contato</a>
       </nav>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
-      <h1 class="fade-in-1">
-        Controle seu dinheiro com o <span class="nexlos-brand">Nexlos</span>
+      <p class="hero-label fade-in-1">✦ Inteligência Financeira Pessoal</p>
+      <h1 class="fade-in-2">
+        Controle seu dinheiro<br />com o
+        <span class="nexlos-brand">Nexlos</span>
       </h1>
-
-      <p class="fade-in-2">
-        Uma inteligência artificial que analisa seus gastos, cria gráficos,
-        organiza sua rotina e te ajuda a manter sua conta positiva.
+      <p class="fade-in-3">
+        Uma inteligência artificial que analisa seus gastos, organiza sua rotina
+        e te ajuda a construir hábitos financeiros sólidos.
       </p>
-
-      <a class="btn fade-in-3" href="login.html">Começar Agora</a>
+      <a class="btn fade-in-4" href="login.html">Começar Agora →</a>
     </section>
 
-    <section class="container">
-      <div class="card fade-in-3">
-        <h2>
-          Assistente
-          <span class="nexlos-brand" style="font-size: 13px">Nexlos</span>
-        </h2>
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <div class="features-header reveal">
+        <h2>Tudo que você precisa para uma vida financeira saudável</h2>
+        <p>Disciplina, rotina e inteligência em um só lugar.</p>
+      </div>
 
-        <div class="chat-box">
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">💰</div>
+          <h3>Controle Financeiro</h3>
           <p>
-            <strong>Nexlos:</strong> Olá! Como posso ajudar com suas finanças
-            hoje?
+            Registre receitas e despesas, visualize seu saldo em tempo real e
+            entenda para onde seu dinheiro vai.
           </p>
         </div>
 
-        <input type="text" placeholder="Digite sua pergunta..." />
+        <div class="feature-card reveal">
+          <div class="feature-icon">🤖</div>
+          <h3>IA Personalizada</h3>
+          <p>
+            O Nexlos analisa seu perfil e sugere ações inteligentes para
+            melhorar sua saúde financeira.
+          </p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">📅</div>
+          <h3>Rotina e Hábitos</h3>
+          <p>
+            Monte metas diárias e acompanhe seu progresso. Pequenas ações
+            consistentes criam grandes resultados.
+          </p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">📊</div>
+          <h3>Relatórios Visuais</h3>
+          <p>
+            Gráficos claros e objetivos que mostram sua evolução financeira ao
+            longo do tempo.
+          </p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">🎯</div>
+          <h3>Metas e Disciplina</h3>
+          <p>
+            Defina objetivos financeiros e receba insights para manter o foco e
+            a consistência.
+          </p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">🔒</div>
+          <h3>Segurança Total</h3>
+          <p>
+            Seus dados são protegidos com criptografia de ponta a ponta. Sua
+            privacidade é prioridade.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITAÇÃO MARCO AURÉLIO -->
+    <section class="quote-section" id="quote">
+      <div class="quote-inner reveal">
+        <div class="quote-line"></div>
+        <blockquote class="quote-text">
+          "Você tem poder sobre sua mente, não sobre eventos externos. Perceba
+          isso, e encontrará força."
+        </blockquote>
+        <div class="quote-author">
+          <div class="quote-author-info">
+            <span class="quote-name">Marco Aurélio</span>
+            <span class="quote-title"
+              >Imperador Romano · Filósofo Estoico · Meditações</span
+            >
+          </div>
+        </div>
+        <p class="quote-connection">
+          A disciplina financeira começa na mente. O
+          <span class="nexlos-brand" style="font-size: 14px">Nexlos</span> está
+          aqui para te ajudar a construí-la, um dia de cada vez.
+        </p>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="demo-section">
+      <div class="demo-header reveal">
+        <h2>Veja o <span class="nexlos-brand">Nexlos</span> em ação</h2>
+        <p>Experimente o assistente e o resumo financeiro agora mesmo.</p>
       </div>
 
-      <div class="card fade-in-4">
-        <h2>Resumo Financeiro</h2>
+      <div class="container">
+        <div class="card reveal">
+          <h2>Assistente Nexlos</h2>
+          <div class="chat-box" id="chatBox">
+            <p>
+              <strong>Nexlos:</strong> Olá! Como posso ajudar com suas finanças
+              hoje?
+            </p>
+          </div>
+          <div class="chat-input-row">
+            <input
+              type="text"
+              id="chatInput"
+              placeholder="Digite sua pergunta..."
+              onkeydown="enviarChat(event)"
+            />
+            <button class="chat-send-btn" onclick="enviarChat()">→</button>
+          </div>
+        </div>
 
-        <p>
-          Receita mensal: R$
-          <input type="number" id="receita" placeholder="0,00" />
-        </p>
-        <p>
-          Despesas: R$ <input type="number" id="despesas" placeholder="0,00" />
-        </p>
-        <p>Saldo: R$ <span id="saldo">0</span></p>
-
-        <button onclick="calcular()">Calcular saldo</button>
-
-        <canvas id="grafico"></canvas>
+        <div class="card reveal">
+          <h2>Resumo Financeiro</h2>
+          <div class="finance-row">
+            <label>Receita mensal</label>
+            <div class="finance-input-wrap">
+              <span class="currency">R$</span>
+              <input type="number" id="receita" placeholder="0,00" />
+            </div>
+          </div>
+          <div class="finance-row">
+            <label>Despesas</label>
+            <div class="finance-input-wrap">
+              <span class="currency">R$</span>
+              <input type="number" id="despesas" placeholder="0,00" />
+            </div>
+          </div>
+          <div class="finance-saldo">
+            <span>Saldo</span>
+            <span class="saldo-valor">R$ <span id="saldo">0</span></span>
+          </div>
+          <button onclick="calcular()">Calcular saldo</button>
+          <canvas id="grafico"></canvas>
+        </div>
       </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-section reveal">
+      <h2>Pronto para transformar sua relação com o dinheiro?</h2>
+      <p>
+        Junte-se ao NexPath e comece a construir disciplina financeira hoje.
+      </p>
+      <a class="btn" href="register.html">Criar conta grátis →</a>
     </section>
 
     <footer>
@@ -79,4 +195,3 @@
     <script src="../js/script.js"></script>
   </body>
 </html>
-
