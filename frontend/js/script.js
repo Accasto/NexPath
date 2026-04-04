@@ -1,21 +1,3 @@
-/* ==========================================
-   script.js — NexPath
-   Funções globais compartilhadas entre páginas
-   ========================================== */
-
-/* ------------------------------------------
-   INDEX — Cálculo de saldo
-   ------------------------------------------ */
-
-function calcular() {
-  const receita = Number(document.getElementById("receita").value);
-  const despesas = Number(document.getElementById("despesas").value);
-  const saldo = receita - despesas;
-  const el = document.getElementById("saldo");
-  el.innerText = saldo.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
-  el.style.color = saldo >= 0 ? "var(--cyan-neon)" : "#f87171";
-}
-
 /* ------------------------------------------
    REGISTER — Popup de termos de uso
    ------------------------------------------ */
