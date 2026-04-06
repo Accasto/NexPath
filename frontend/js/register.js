@@ -1,7 +1,9 @@
 /* ==========================================
    register.js — NexPath
-   Validações do formulário de cadastro
+   Validações e envio do formulário de cadastro
    ========================================== */
+
+const API_URL = 'http://localhost:3000';
 
 /* ------------------------------------------
    Validação de campos em tempo real
@@ -11,11 +13,11 @@
 function validarNomeInput(input) {
   const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
   if (!regex.test(input.value)) {
-    input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
-    input.setCustomValidity("Use apenas letras e espaços.");
+    input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+    input.setCustomValidity('Use apenas letras e espaços.');
     input.reportValidity();
   } else {
-    input.setCustomValidity("");
+    input.setCustomValidity('');
   }
 }
 
@@ -23,139 +25,127 @@ function validarNomeInput(input) {
 function validarUsuarioInput(input) {
   const regex = /^[a-zA-Z0-9_]*$/;
   if (!regex.test(input.value)) {
-    input.value = input.value.replace(/[^a-zA-Z0-9_]/g, "");
-    input.setCustomValidity("Use apenas letras, números e _ (underline).");
+    input.value = input.value.replace(/[^a-zA-Z0-9_]/g, '');
+    input.setCustomValidity('Use apenas letras, números e _ (underline).');
     input.reportValidity();
   } else {
-    input.setCustomValidity("");
+    input.setCustomValidity('');
   }
 }
+
 
 /* ------------------------------------------
    Listener de confirmação de senha
    ------------------------------------------ */
 
-if (document.readyState !== "loading") {
+if (document.readyState !== 'loading') {
   setupListeners();
 } else {
-  document.addEventListener("DOMContentLoaded", setupListeners);
+  document.addEventListener('DOMContentLoaded', setupListeners);
 }
 
 function setupListeners() {
-  const senhaInput = document.getElementById("senha");
-  const confirmarInput = document.getElementById("confirmarSenha");
+  const senhaInput = document.getElementById('senha');
+  const confirmarInput = document.getElementById('confirmarSenha');
 
   if (senhaInput && confirmarInput) {
     const validatePasswordMatch = () => {
       if (senhaInput.value !== confirmarInput.value) {
-        confirmarInput.setCustomValidity("As senhas não são iguais.");
+        confirmarInput.setCustomValidity('As senhas não são iguais.');
       } else {
-        confirmarInput.setCustomValidity("");
+        confirmarInput.setCustomValidity('');
       }
     };
-    senhaInput.addEventListener("input", validatePasswordMatch);
-    confirmarInput.addEventListener("input", validatePasswordMatch);
+    senhaInput.addEventListener('input', validatePasswordMatch);
+    confirmarInput.addEventListener('input', validatePasswordMatch);
   }
 }
 
+
 /* ------------------------------------------
-   Validação completa do formulário
+   Validação completa e envio ao backend
    ------------------------------------------ */
 
-function validarRegistro() {
-  const nome = document.getElementById("nome");
-  const usuario = document.getElementById("usuario");
-  const email = document.getElementById("email");
-  const telefone = document.getElementById("telefone");
-  const senha = document.getElementById("senha");
-  const confirmar = document.getElementById("confirmarSenha");
-  const nascimento = document.getElementById("nascimento");
-  const termos = document.getElementById("terms");
+async function validarRegistro() {
+  const nome = document.getElementById('nome');
+  const usuario = document.getElementById('usuario');
+  const email = document.getElementById('email');
+  const telefone = document.getElementById('telefone');
+  const dddPais = document.getElementById('dddPais');
+  const senha = document.getElementById('senha');
+  const confirmar = document.getElementById('confirmarSenha');
+  const nascimento = document.getElementById('nascimento');
+  const termos = document.getElementById('terms');
 
   // Limpar validações anteriores
-  [
-    nome,
-    usuario,
-    email,
-    telefone,
-    senha,
-    confirmar,
-    nascimento,
-    termos,
-  ].forEach((el) => {
-    el.setCustomValidity("");
+  [nome, usuario, email, telefone, senha, confirmar, nascimento, termos].forEach(el => {
+    el.setCustomValidity('');
   });
 
   // Nome de usuário
   const usuarioValor = usuario.value.trim();
   if (!usuarioValor) {
-    usuario.setCustomValidity("Escolha um nome de usuário.");
+    usuario.setCustomValidity('Escolha um nome de usuário.');
     usuario.reportValidity();
     return false;
   }
   if (!/^[a-zA-Z0-9_]+$/.test(usuarioValor)) {
-    usuario.setCustomValidity("Use apenas letras, números e _ (underline).");
+    usuario.setCustomValidity('Use apenas letras, números e _ (underline).');
     usuario.reportValidity();
     return false;
   }
   if (usuarioValor.length < 3) {
-    usuario.setCustomValidity(
-      "Nome de usuário precisa ter pelo menos 3 caracteres.",
-    );
+    usuario.setCustomValidity('Nome de usuário precisa ter pelo menos 3 caracteres.');
     usuario.reportValidity();
     return false;
   }
 
-  // Telefone: DDD (2 dígitos) + número (8 ou 9 dígitos) = 10 ou 11 dígitos
+  // Telefone
   const telValor = telefone.value.trim();
   if (!telValor || telValor.length < 10 || telValor.length > 11) {
-    telefone.setCustomValidity("Digite DDD + número. Ex: 11991234567");
+    telefone.setCustomValidity('Digite DDD + número. Ex: 11991234567');
     telefone.reportValidity();
     return false;
   }
 
-  // Senha: mínimo 8 caracteres, uma maiúscula, um número e um símbolo
+  // Senha
   const senhaValor = senha.value;
   if (!senhaValor || senhaValor.length < 8) {
-    senha.setCustomValidity("A senha precisa ter no mínimo 8 caracteres.");
+    senha.setCustomValidity('A senha precisa ter no mínimo 8 caracteres.');
     senha.reportValidity();
     return false;
   }
   if (!/[A-Z]/.test(senhaValor)) {
-    senha.setCustomValidity(
-      "A senha precisa ter pelo menos uma letra maiúscula.",
-    );
+    senha.setCustomValidity('A senha precisa ter pelo menos uma letra maiúscula.');
     senha.reportValidity();
     return false;
   }
   if (!/[0-9]/.test(senhaValor)) {
-    senha.setCustomValidity("A senha precisa ter pelo menos um número.");
+    senha.setCustomValidity('A senha precisa ter pelo menos um número.');
     senha.reportValidity();
     return false;
   }
   if (!/[!@#$%^&*()\-_=+\[\]{};':",./<>?|`~\\]/.test(senhaValor)) {
-    senha.setCustomValidity(
-      "A senha precisa ter pelo menos um símbolo! Ex: ! @ # $ % ^ & *",
-    );
+    senha.setCustomValidity('A senha precisa ter pelo menos um símbolo! Ex: ! @ # $ % ^ & *');
     senha.reportValidity();
     return false;
   }
   if (/\s/.test(senhaValor)) {
-    senha.setCustomValidity("A senha não pode conter espaços.");
+    senha.setCustomValidity('A senha não pode conter espaços.');
     senha.reportValidity();
     return false;
   }
   if (senhaValor !== confirmar.value) {
-    confirmar.setCustomValidity("As senhas não são iguais.");
+    confirmar.setCustomValidity('As senhas não são iguais.');
     confirmar.reportValidity();
     return false;
   }
 
-  // Data de nascimento: mínimo 10 anos
+  // Data de nascimento
   const hoje = new Date();
   const dataNasc = new Date(nascimento.value);
   if (isNaN(dataNasc.getTime())) {
-    nascimento.setCustomValidity("Data de nascimento inválida.");
+    nascimento.setCustomValidity('Data de nascimento inválida.');
     nascimento.reportValidity();
     return false;
   }
@@ -163,20 +153,52 @@ function validarRegistro() {
   const m = hoje.getMonth() - dataNasc.getMonth();
   if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) idade--;
   if (idade < 10) {
-    nascimento.setCustomValidity(
-      "É necessário ter pelo menos 10 anos para criar uma conta.",
-    );
+    nascimento.setCustomValidity('É necessário ter pelo menos 10 anos para criar uma conta.');
     nascimento.reportValidity();
     return false;
   }
 
-  // Termos de uso
+  // Termos
   if (!termos.checked) {
-    termos.setCustomValidity("Você precisa aceitar os termos de uso.");
+    termos.setCustomValidity('Você precisa aceitar os termos de uso.');
     termos.reportValidity();
     return false;
   }
 
-  // TODO: enviar dados para o backend
+  try {
+    // Envia os dados para o backend
+    const resposta = await fetch(`${API_URL}/auth/registro`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nome: nome.value.trim(),
+        usuario: usuarioValor.toLowerCase(),
+        email: email.value.trim(),
+        telefone: dddPais.value + telValor,
+        senha: senhaValor,
+        nascimento: nascimento.value
+      })
+    });
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+      // Trata erros específicos do backend
+      if (dados.erro && dados.erro.includes('Email ou nome de usuário')) {
+        alert('Este email ou nome de usuário já está cadastrado.');
+      } else {
+        alert(dados.erro || 'Erro ao criar conta.');
+      }
+      return false;
+    }
+
+    alert('Conta criada com sucesso! Faça login para continuar.');
+    window.location.href = 'login.html';
+
+  } catch (err) {
+    alert('Erro ao conectar ao servidor. Verifique se o backend está rodando.');
+    console.error(err);
+  }
+
   return false;
 }

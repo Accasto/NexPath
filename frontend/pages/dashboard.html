@@ -40,14 +40,14 @@
         >
           R$ 0,00
         </p>
-        <p>Conecte ao backend para ver seu saldo real.</p>
+        <p>Suas transações aparecerão aqui em breve.</p>
       </div>
 
       <div class="card">
         <h2>Últimas Transações</h2>
         <p>
-          Nenhuma transação ainda.<br />O histórico aparecerá aqui após a
-          integração com o banco de dados.
+          Nenhuma transação ainda.<br />
+          O histórico aparecerá aqui após a integração completa.
         </p>
       </div>
     </section>
@@ -55,21 +55,27 @@
     <script src="../js/script.js"></script>
     <script>
       /* ------------------------------------------
-         Verificação de login — temporária
-         Substituir pela verificação real do backend
+         Verificação de login via JWT
+         Redireciona para login se não estiver logado
          ------------------------------------------ */
       (function () {
-        const usuario = localStorage.getItem("nexpath_logado");
-        if (!usuario) {
+        const token = sessionStorage.getItem("nexpath_token");
+        const usuario = sessionStorage.getItem("nexpath_usuario");
+
+        if (!token || !usuario) {
           window.location.href = "login.html";
-        } else {
-          const el = document.getElementById("nav-usuario");
-          if (el) el.textContent = "@" + usuario;
+          return;
         }
+
+        // Exibe o nome do usuário na navbar
+        const el = document.getElementById("nav-usuario");
+        if (el) el.textContent = "@" + usuario;
       })();
 
       function logout() {
-        localStorage.removeItem("nexpath_logado");
+        sessionStorage.removeItem("nexpath_token");
+        sessionStorage.removeItem("nexpath_usuario");
+        sessionStorage.removeItem("nexpath_nome");
         window.location.href = "login.html";
       }
     </script>
