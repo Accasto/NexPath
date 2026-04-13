@@ -75,7 +75,7 @@ app.post('/auth/registro', async (req, res) => {
 
         // Checar username duplicado
         const usuarioExiste = await pool.query(
-            'SELECT id FROM usuarios WHERE usuario = $1', [usuario.toLowerCase()]
+            'SELECT id FROM usuarios WHERE LOWER(usuario) = LOWER($1)', [usuario]
         );
         if (usuarioExiste.rows.length > 0) {
             return res.status(409).json({ erro: 'usuario_duplicado' });
@@ -88,7 +88,7 @@ app.post('/auth/registro', async (req, res) => {
         const resultado = await pool.query(
             `INSERT INTO usuarios (nome, usuario, email, telefone, senha_hash, nascimento)
              VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, nome, usuario, email`,
-            [nome, usuario.toLowerCase(), email, telefone, senha_hash, nascimento]
+            [nome, usuario, email, telefone, senha_hash, nascimento]
         );
 
         res.status(201).json({

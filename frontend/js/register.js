@@ -168,7 +168,7 @@ async function validarRegistro() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         nome: nome.value.trim(),
-        usuario: usuarioValor.toLowerCase(),
+        usuario: usuarioValor,
         email: email.value.trim(),
         telefone: dddPais.value + telValor,
         senha: senhaValor,
