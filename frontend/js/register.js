@@ -9,7 +9,6 @@ const API_URL = 'http://localhost:3000';
    Validação de campos em tempo real
    ------------------------------------------ */
 
-// Nome completo: só aceita letras (incluindo acentos) e espaços
 function validarNomeInput(input) {
   const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
   if (!regex.test(input.value)) {
@@ -21,7 +20,6 @@ function validarNomeInput(input) {
   }
 }
 
-// Nome de usuário: só aceita letras, números e underline
 function validarUsuarioInput(input) {
   const regex = /^[a-zA-Z0-9_]*$/;
   if (!regex.test(input.value)) {
@@ -49,7 +47,7 @@ function setupListeners() {
   const confirmarInput = document.getElementById('confirmarSenha');
 
   if (senhaInput && confirmarInput) {
-    const validatePasswordMatch = () => {
+    const validatePasswordMatch = function () {
       if (senhaInput.value !== confirmarInput.value) {
         confirmarInput.setCustomValidity('As senhas não são iguais.');
       } else {
@@ -77,8 +75,7 @@ async function validarRegistro() {
   const nascimento = document.getElementById('nascimento');
   const termos = document.getElementById('terms');
 
-  // Limpar validações anteriores
-  [nome, usuario, email, telefone, senha, confirmar, nascimento, termos].forEach(el => {
+  [nome, usuario, email, telefone, senha, confirmar, nascimento, termos].forEach(function (el) {
     el.setCustomValidity('');
   });
 
@@ -166,7 +163,6 @@ async function validarRegistro() {
   }
 
   try {
-    // Envia os dados para o backend
     const resposta = await fetch(`${API_URL}/auth/registro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -183,20 +179,23 @@ async function validarRegistro() {
     const dados = await resposta.json();
 
     if (!resposta.ok) {
-      // Trata erros específicos do backend
-      if (dados.erro && dados.erro.includes('Email ou nome de usuário')) {
-        alert('Este email ou nome de usuário já está cadastrado.');
+      if (dados.erro === 'email_duplicado') {
+        mostrarPopup('Este email já está cadastrado.', 'erro');
+      } else if (dados.erro === 'usuario_duplicado') {
+        mostrarPopup('Este nome de usuário já está em uso. Escolha outro.', 'erro');
       } else {
-        alert(dados.erro || 'Erro ao criar conta.');
+        mostrarPopup(dados.erro || 'Erro ao criar conta.', 'erro');
       }
       return false;
     }
 
-    alert('Conta criada com sucesso! Faça login para continuar.');
-    window.location.href = 'login.html';
+    // Sucesso — mostra popup e redireciona ao fechar
+    mostrarPopup('Conta criada com sucesso! Você será redirecionado para o login.', 'sucesso', function () {
+      window.location.href = 'login.html';
+    });
 
   } catch (err) {
-    alert('Erro ao conectar ao servidor. Verifique se o backend está rodando.');
+    mostrarPopup('Erro ao conectar ao servidor. Verifique se o backend está rodando.', 'erro');
     console.error(err);
   }
 

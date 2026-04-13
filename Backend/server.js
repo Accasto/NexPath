@@ -39,8 +39,6 @@ pool.connect()
 
 // ==========================================
 // MIDDLEWARE DE AUTENTICAÇÃO JWT
-// Verifica se o token é válido antes de
-// permitir acesso às rotas protegidas
 // ==========================================
 
 function autenticar(req, res, next) {
@@ -67,13 +65,20 @@ app.post('/auth/registro', async (req, res) => {
     const { nome, usuario, email, telefone, senha, nascimento } = req.body;
 
     try {
-        // Verificar se email ou usuário já existem
-        const existe = await pool.query(
-            'SELECT id FROM usuarios WHERE email = $1 OR usuario = $2',
-            [email, usuario]
+        // Checar email duplicado
+        const emailExiste = await pool.query(
+            'SELECT id FROM usuarios WHERE email = $1', [email]
         );
-        if (existe.rows.length > 0) {
-            return res.status(409).json({ erro: 'Email ou nome de usuário já cadastrado.' });
+        if (emailExiste.rows.length > 0) {
+            return res.status(409).json({ erro: 'email_duplicado' });
+        }
+
+        // Checar username duplicado
+        const usuarioExiste = await pool.query(
+            'SELECT id FROM usuarios WHERE usuario = $1', [usuario.toLowerCase()]
+        );
+        if (usuarioExiste.rows.length > 0) {
+            return res.status(409).json({ erro: 'usuario_duplicado' });
         }
 
         // Criptografar a senha
@@ -97,19 +102,19 @@ app.post('/auth/registro', async (req, res) => {
     }
 });
 
-// POST /auth/login — Fazer login
+// POST /auth/login — Login com email OU username
 app.post('/auth/login', async (req, res) => {
-    const { email, senha } = req.body;
+    const { identificador, senha } = req.body;
 
     try {
-        // Buscar usuário pelo email
+        // Busca pelo email ou pelo username
         const resultado = await pool.query(
-            'SELECT * FROM usuarios WHERE email = $1',
-            [email]
+            'SELECT * FROM usuarios WHERE email = $1 OR usuario = $1',
+            [identificador.toLowerCase()]
         );
 
         if (resultado.rows.length === 0) {
-            return res.status(401).json({ erro: 'Email ou senha incorretos.' });
+            return res.status(401).json({ erro: 'Usuário ou senha incorretos.' });
         }
 
         const usuario = resultado.rows[0];
@@ -117,7 +122,7 @@ app.post('/auth/login', async (req, res) => {
         // Verificar senha
         const senhaCorreta = await bcrypt.compare(senha, usuario.senha_hash);
         if (!senhaCorreta) {
-            return res.status(401).json({ erro: 'Email ou senha incorretos.' });
+            return res.status(401).json({ erro: 'Usuário ou senha incorretos.' });
         }
 
         // Gerar token JWT
@@ -148,7 +153,6 @@ app.post('/auth/login', async (req, res) => {
 // ROTAS DE TRANSAÇÕES
 // ==========================================
 
-// GET /transacoes — Listar transações do usuário
 app.get('/transacoes', autenticar, async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -162,10 +166,8 @@ app.get('/transacoes', autenticar, async (req, res) => {
     }
 });
 
-// POST /transacoes — Criar nova transação
 app.post('/transacoes', autenticar, async (req, res) => {
     const { tipo, valor, descricao, categoria, data } = req.body;
-
     try {
         const resultado = await pool.query(
             `INSERT INTO transacoes (usuario_id, tipo, valor, descricao, categoria, data)
@@ -179,7 +181,6 @@ app.post('/transacoes', autenticar, async (req, res) => {
     }
 });
 
-// DELETE /transacoes/:id — Deletar transação
 app.delete('/transacoes/:id', autenticar, async (req, res) => {
     try {
         await pool.query(
@@ -197,7 +198,6 @@ app.delete('/transacoes/:id', autenticar, async (req, res) => {
 // ROTAS DE METAS
 // ==========================================
 
-// GET /metas — Listar metas do usuário
 app.get('/metas', autenticar, async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -211,10 +211,8 @@ app.get('/metas', autenticar, async (req, res) => {
     }
 });
 
-// POST /metas — Criar nova meta
 app.post('/metas', autenticar, async (req, res) => {
     const { tipo, titulo, descricao, frequencia, data_fim } = req.body;
-
     try {
         const resultado = await pool.query(
             `INSERT INTO metas (usuario_id, tipo, titulo, descricao, frequencia, data_fim)
@@ -228,7 +226,6 @@ app.post('/metas', autenticar, async (req, res) => {
     }
 });
 
-// PATCH /metas/:id — Marcar meta como concluída
 app.patch('/metas/:id', autenticar, async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -246,7 +243,6 @@ app.patch('/metas/:id', autenticar, async (req, res) => {
 // ROTAS DE INVESTIMENTOS
 // ==========================================
 
-// GET /investimentos — Listar investimentos
 app.get('/investimentos', autenticar, async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -260,10 +256,8 @@ app.get('/investimentos', autenticar, async (req, res) => {
     }
 });
 
-// POST /investimentos — Registrar investimento
 app.post('/investimentos', autenticar, async (req, res) => {
     const { tipo, descricao, valor_investido, valor_atual, data } = req.body;
-
     try {
         const resultado = await pool.query(
             `INSERT INTO investimentos (usuario_id, tipo, descricao, valor_investido, valor_atual, data)
@@ -281,7 +275,6 @@ app.post('/investimentos', autenticar, async (req, res) => {
 // ROTAS DE DIETA
 // ==========================================
 
-// GET /dieta — Listar refeições
 app.get('/dieta', autenticar, async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -295,10 +288,8 @@ app.get('/dieta', autenticar, async (req, res) => {
     }
 });
 
-// POST /dieta — Registrar refeição
 app.post('/dieta', autenticar, async (req, res) => {
     const { refeicao, descricao, calorias, proteinas, carboidratos, gorduras, data } = req.body;
-
     try {
         const resultado = await pool.query(
             `INSERT INTO dieta (usuario_id, refeicao, descricao, calorias, proteinas, carboidratos, gorduras, data)
@@ -316,7 +307,6 @@ app.post('/dieta', autenticar, async (req, res) => {
 // ROTAS DE TREINOS
 // ==========================================
 
-// GET /treinos — Listar treinos
 app.get('/treinos', autenticar, async (req, res) => {
     try {
         const resultado = await pool.query(
@@ -330,10 +320,8 @@ app.get('/treinos', autenticar, async (req, res) => {
     }
 });
 
-// POST /treinos — Registrar treino
 app.post('/treinos', autenticar, async (req, res) => {
     const { nome, tipo, duracao_min, calorias_gastas, observacoes, data } = req.body;
-
     try {
         const resultado = await pool.query(
             `INSERT INTO treinos (usuario_id, nome, tipo, duracao_min, calorias_gastas, observacoes, data)

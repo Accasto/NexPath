@@ -116,6 +116,64 @@ body {
 }
 
 /* ------------------------------------------
+   GLOBAL — Popup estilizado (substitui alert)
+   ------------------------------------------ */
+
+.nexpath-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 5, 16, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.nexpath-popup.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nexpath-popup-content {
+  background: rgba(7, 20, 40, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 16px;
+  padding: 40px 36px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(56, 189, 248, 0.15);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.nexpath-popup.ativo .nexpath-popup-content {
+  transform: translateY(0);
+}
+
+.nexpath-popup-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.nexpath-popup-content p {
+  color: var(--text-main);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.nexpath-popup-content .btn {
+  margin-top: 0;
+  padding: 10px 32px;
+}p
+
+/* ------------------------------------------
    GLOBAL — Scroll Reveal
    ------------------------------------------ */
 

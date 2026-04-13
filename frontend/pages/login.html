@@ -13,19 +13,17 @@
         Entrar no <span class="nexpath-brand">NexPath</span>
       </h1>
 
-      <form
-        class="card login-card fade-in-2"
-        id="loginForm"
-        method="post"
-      >
+      <form class="card login-card fade-in-2" id="loginForm">
         <input
-          id="loginEmail"
-          name="loginEmail"
-          type="email"
-          placeholder="Email"
+          id="loginIdentificador"
+          name="loginIdentificador"
+          type="text"
+          placeholder="Email ou nome de usuário"
           required
           oninvalid="
-            this.setCustomValidity('Por favor, preencha um email válido.')
+            this.setCustomValidity(
+              'Por favor, preencha seu email ou nome de usuário.',
+            )
           "
           oninput="this.setCustomValidity('')"
         />
@@ -64,12 +62,10 @@
             <img src="../icons/Google.svg" alt="Google" />
             Entrar com Google
           </button>
-
           <button class="social-btn" type="button">
             <img src="../icons/Microsoft.svg" alt="Microsoft" />
             Entrar com Microsoft
           </button>
-
           <button class="social-btn" type="button">
             <img src="../icons/Github.svg" alt="GitHub" />
             Entrar com GitHub
@@ -77,6 +73,15 @@
         </div>
       </form>
     </section>
+
+    <!-- Popup estilizado de notificações -->
+    <div id="nexpath-popup" class="nexpath-popup">
+      <div class="nexpath-popup-content">
+        <span class="nexpath-popup-icon" id="popup-icon">⚠️</span>
+        <p id="popup-mensagem"></p>
+        <button class="btn" onclick="fecharPopup()">OK</button>
+      </div>
+    </div>
 
     <script src="../js/script.js"></script>
     <script src="../js/login.js"></script>

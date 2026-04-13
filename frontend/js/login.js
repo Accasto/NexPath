@@ -1,4 +1,4 @@
-/* ==========================================
+ /* ==========================================
    login.js — NexPath
    Validação e envio do formulário de login
    ========================================== */
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function validarLogin() {
   console.log('📝 Formulário sendo processado...');
-  const email = document.getElementById('loginEmail').value.trim();
+  const email = document.getElementById('loginIdentificador').value.trim();
   const senha = document.getElementById('loginSenha').value;
 
   // Validações básicas no frontend
@@ -28,10 +28,7 @@ async function validarLogin() {
     alert('Preencha email e senha.');
     return;
   }
-  if (!email.includes('@')) {
-    alert('Digite um email válido.');
-    return;
-  }
+
   if (senha.length < 8) {
     alert('A senha precisa ter no mínimo 8 caracteres.');
     return;
@@ -42,7 +39,7 @@ async function validarLogin() {
     const resposta = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, senha })
+      body: JSON.stringify({ identificador: email, senha })
     });
 
     const dados = await resposta.json();
