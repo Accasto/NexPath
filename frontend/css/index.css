@@ -1,0 +1,263 @@
+/* ==========================================
+   index.css — NexPath
+   Estilos exclusivos da página inicial
+   ========================================== */
+
+/* ------------------------------------------
+   Hero
+   ------------------------------------------ */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 160px 20px 100px;
+  max-width: 860px;
+  margin: auto;
+}
+
+.hero-label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan-neon);
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.hero h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  line-height: 1.15;
+  color: var(--text-main);
+}
+
+.hero p {
+  font-size: 18px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------
+   Features
+   ------------------------------------------ */
+
+.features {
+  position: relative;
+  z-index: 1;
+  padding: 80px 8%;
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.features-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-main);
+}
+
+.features-header p {
+  color: var(--text-dim);
+  font-size: 16px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 28px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 12px 40px rgba(56, 189, 248, 0.1);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.feature-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--blue-bright);
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+  transition:
+    stroke 0.3s,
+    filter 0.3s;
+}
+
+.feature-card:hover .feature-icon svg {
+  stroke: var(--cyan-neon);
+  filter: drop-shadow(0 0 12px rgba(0, 245, 212, 0.5));
+}
+
+.feature-card h3 {
+  font-family: "Orbitron", monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--blue-bright);
+  margin: 0 0 10px;
+}
+
+.feature-card p {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ------------------------------------------
+   Citação Marco Aurélio
+   ------------------------------------------ */
+
+.quote-section {
+  position: relative;
+  z-index: 1;
+  padding: 100px 8%;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(14, 165, 233, 0.04) 40%,
+    rgba(0, 245, 212, 0.03) 70%,
+    transparent 100%
+  );
+  border-top: 1px solid rgba(56, 189, 248, 0.06);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.06);
+}
+
+.quote-inner {
+  max-width: 720px;
+  margin: auto;
+}
+
+.quote-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-mid), var(--cyan-neon));
+  margin: 0 auto 40px;
+  border-radius: 2px;
+}
+
+.quote-text {
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text-main);
+  margin: 0 0 32px;
+  border: none;
+  padding: 0;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.quote-author-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.quote-name {
+  font-family: "Orbitron", monospace;
+  font-size: 14px;
+  color: var(--blue-bright);
+  letter-spacing: 1px;
+}
+
+.quote-title {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+.quote-connection {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------
+   Media queries específicas do index
+   ------------------------------------------ */
+
+@media (max-width: 1024px) {
+  .features {
+    padding: 60px 5%;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .quote-section {
+    padding: 80px 5%;
+  }
+  .quote-text {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .features-header h2 {
+    font-size: 24px;
+  }
+  .quote-text {
+    font-size: 18px;
+  }
+  .quote-section {
+    padding: 60px 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .features {
+    padding: 50px 4%;
+  }
+  .feature-card {
+    padding: 20px;
+  }
+  .quote-text {
+    font-size: 16px;
+  }
+  .quote-title {
+    font-size: 11px;
+  }
+}

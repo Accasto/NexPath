@@ -1,17 +1,14 @@
- /* ==========================================
+/* ==========================================
    login.js — NexPath
    Validação e envio do formulário de login
    ========================================== */
 
 const API_URL = 'http://localhost:3000';
-console.log('✅ login.js carregado!');
 
-// Capturar o formulário e adicionar event listener
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      console.log('🔔 Submit evento capturado!');
+    loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
       validarLogin();
     });
@@ -19,47 +16,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function validarLogin() {
-  console.log('📝 Formulário sendo processado...');
-  const email = document.getElementById('loginIdentificador').value.trim();
+  const identificador = document.getElementById('loginIdentificador').value.trim();
   const senha = document.getElementById('loginSenha').value;
 
-  // Validações básicas no frontend
-  if (email === '' || senha === '') {
-    alert('Preencha email e senha.');
+  if (!identificador || !senha) {
+    mostrarPopup('Preencha todos os campos.', 'erro');
     return;
   }
-
   if (senha.length < 8) {
-    alert('A senha precisa ter no mínimo 8 caracteres.');
+    mostrarPopup('A senha precisa ter no mínimo 8 caracteres.', 'erro');
     return;
   }
 
   try {
-    // Envia as credenciais para o backend
     const resposta = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ identificador: email, senha })
+      body: JSON.stringify({ identificador, senha })
     });
 
     const dados = await resposta.json();
 
     if (!resposta.ok) {
-      alert(dados.erro || 'Erro ao fazer login.');
+      mostrarPopup(dados.erro || 'Erro ao fazer login.', 'erro');
       return;
     }
 
-    // Salva o token JWT e dados do usuário no sessionStorage
+    // sessionStorage mantém o login durante a navegação na aba
+    // Some automaticamente quando o usuário fecha o navegador
     sessionStorage.setItem('nexpath_token', dados.token);
     sessionStorage.setItem('nexpath_usuario', dados.usuario.usuario);
     sessionStorage.setItem('nexpath_nome', dados.usuario.nome);
 
-    console.log('✅ Login bem-sucedido! Redirecionando...');
-    // Redireciona para o dashboard
-    window.location.href = '/pages/dashboard.html';
+    window.location.href = 'dashboard.html';
 
   } catch (err) {
-    alert('Erro ao conectar ao servidor. Verifique se o backend está rodando.');
+    mostrarPopup('Erro ao conectar ao servidor. Verifique se o backend está rodando.', 'erro');
     console.error(err);
   }
 }

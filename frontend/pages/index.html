@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NexPath - Assistente Financeiro</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/index.css" />
   </head>
 
   <body>
@@ -13,9 +14,60 @@
       <nav>
         <a href="#">Home</a>
         <a href="#features">Recursos</a>
-        <a href="#quote">Filosofia</a>
-        <a href="login.html" class="nav-btn-outline">Login</a>
-        <a href="register.html" class="nav-btn">Cadastrar-se</a>
+        <a href="#" id="nav-dashboard-link">Dashboard</a>
+
+        <!-- Contato dropdown -->
+        <div class="nav-contato-wrap">
+          <a href="#" class="nav-contato-btn" onclick="toggleContato(event)"
+            >Contato</a
+          >
+          <div class="nav-contato-dropdown" id="contatoDropdown">
+            <a href="mailto:nexpath.contato@gmail.com" class="contato-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              nexpath.contato@gmail.com
+            </a>
+            <a
+              href="https://wa.me/5511999999999"
+              target="_blank"
+              class="contato-item"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+              WhatsApp Business
+            </a>
+          </div>
+        </div>
+
+        <a href="login.html" class="nav-btn-outline" id="nav-login-btn"
+          >Login</a
+        >
+        <a href="register.html" class="nav-btn" id="nav-register-btn"
+          >Cadastrar-se</a
+        >
       </nav>
     </header>
 
@@ -43,7 +95,6 @@
       <div class="features-grid">
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <!-- Ícone: gráfico de barras / controle financeiro -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -68,7 +119,6 @@
 
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <!-- Ícone: IA / circuito -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -93,7 +143,6 @@
 
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <!-- Ícone: calendário / rotina -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -107,9 +156,6 @@
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
-              <line x1="8" y1="14" x2="8" y2="14"></line>
-              <line x1="12" y1="14" x2="12" y2="14"></line>
-              <line x1="16" y1="14" x2="16" y2="14"></line>
             </svg>
           </div>
           <h3>Rotina e Hábitos</h3>
@@ -121,7 +167,6 @@
 
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <!-- Ícone: gráfico de linha / relatórios -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -143,7 +188,6 @@
 
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <!-- Ícone: alvo / metas -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -167,7 +211,6 @@
 
         <div class="feature-card reveal">
           <div class="feature-icon">
-            <!-- Ícone: cadeado / segurança -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -225,5 +268,36 @@
     </footer>
 
     <script src="../js/script.js"></script>
+    <script>
+      // Verifica se está logado e ajusta a navbar
+      (function () {
+        const token = sessionStorage.getItem("nexpath_token");
+        const dashLink = document.getElementById("nav-dashboard-link");
+
+        if (token) {
+          // Logado: Dashboard vai pro dashboard, esconde login/cadastro
+          dashLink.href = "dashboard.html";
+          document.getElementById("nav-login-btn").style.display = "none";
+          document.getElementById("nav-register-btn").style.display = "none";
+        } else {
+          // Não logado: Dashboard vai pro login
+          dashLink.href = "login.html";
+        }
+      })();
+
+      // Toggle dropdown de contato
+      function toggleContato(e) {
+        e.preventDefault();
+        document.getElementById("contatoDropdown").classList.toggle("ativo");
+      }
+
+      // Fecha ao clicar fora
+      document.addEventListener("click", function (e) {
+        const wrap = document.querySelector(".nav-contato-wrap");
+        if (wrap && !wrap.contains(e.target)) {
+          document.getElementById("contatoDropdown").classList.remove("ativo");
+        }
+      });
+    </script>
   </body>
 </html>

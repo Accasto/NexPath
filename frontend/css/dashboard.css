@@ -1,0 +1,66 @@
+/* ==========================================
+   dashboard.css — NexPath
+   Estilos exclusivos do dashboard
+   ========================================== */
+
+/* ------------------------------------------
+   Hero do dashboard
+   ------------------------------------------ */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 160px 20px 60px;
+  max-width: 860px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.15;
+  color: var(--text-main);
+}
+
+.hero p {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ------------------------------------------
+   Grid de cards
+   ------------------------------------------ */
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 0 8% 80px;
+}
+
+/* ------------------------------------------
+   Media queries
+   ------------------------------------------ */
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 0 5% 40px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 120px 16px 40px;
+  }
+  .hero h1 {
+    font-size: 28px;
+  }
+}

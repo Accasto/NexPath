@@ -1,0 +1,155 @@
+/* ==========================================
+   register.css — NexPath
+   Estilos exclusivos da página de cadastro
+   ========================================== */
+
+/* ------------------------------------------
+   Hero compacto do register
+   ------------------------------------------ */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 90px 20px 40px;
+  max-width: 520px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  line-height: 1.15;
+  color: var(--text-main);
+}
+
+/* ------------------------------------------
+   Formulário de cadastro
+   ------------------------------------------ */
+
+.register-card {
+  max-width: 420px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.birth-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.login-link {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.login-link a {
+  color: var(--cyan-neon);
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.terms-link {
+  color: var(--blue-bright);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.field-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: -4px;
+}
+
+/* ------------------------------------------
+   Telefone com DDD
+   ------------------------------------------ */
+
+.phone-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ddd-select {
+  width: 130px;
+  flex-shrink: 0;
+  padding: 12px 8px;
+  margin-top: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  background: rgba(2, 12, 27, 0.8);
+  color: var(--text-main);
+  font-family: "Syne", sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.ddd-select:focus {
+  border-color: var(--blue-bright);
+}
+
+.ddd-select option {
+  background: var(--bg-dark);
+}
+
+.phone-input {
+  flex: 1;
+  margin-top: 0 !important;
+  width: 100% !important;
+}
+
+/* ------------------------------------------
+   Media queries
+   ------------------------------------------ */
+
+@media (max-width: 768px) {
+  .register-card {
+    max-width: 100%;
+  }
+  .hero {
+    padding-top: 100px;
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .hero h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 88px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .hero h1 {
+    font-size: 24px;
+  }
+  .ddd-select {
+    width: 100px;
+    font-size: 12px;
+  }
+}
