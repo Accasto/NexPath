@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil - NexPath</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">NexPath</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html" id="nav-usuario" class="nav-usuario-label"></a>
+        <a href="#" onclick="logout()" class="nav-btn-outline">Sair</a>
+      </nav>
+    </header>
+
+    <div class="profile-layout">
+      <!-- Barra lateral de navegação -->
+      <aside class="profile-sidebar">
+        <div class="profile-avatar">
+          <div class="avatar-circle" id="avatar-initials"></div>
+          <p class="profile-username" id="sidebar-usuario"></p>
+          <p class="profile-role" id="sidebar-role"></p>
+        </div>
+
+        <nav class="profile-nav">
+          <a
+            href="#"
+            class="profile-nav-item active"
+            onclick="trocarAba('perfil', this)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Meu Perfil
+          </a>
+
+          <a
+            href="#"
+            class="profile-nav-item"
+            onclick="trocarAba('personalizacao', this)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+              ></path>
+            </svg>
+            Personalização
+          </a>
+
+          <a
+            href="#"
+            class="profile-nav-item"
+            onclick="trocarAba('configuracoes', this)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" y1="6" x2="20" y2="6"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+            Configurações
+          </a>
+
+          <a
+            href="#"
+            class="profile-nav-item profile-nav-danger"
+            onclick="trocarAba('conta', this)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+              <path d="M10 11v6M14 11v6"></path>
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+            </svg>
+            Excluir Conta
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Conteúdo principal -->
+      <main class="profile-main">
+        <!-- ABA: Meu Perfil -->
+        <section class="profile-tab active" id="tab-perfil">
+          <h2 class="profile-section-title">Meu Perfil</h2>
+
+          <div class="profile-card">
+            <div class="profile-field-group">
+              <label>Nome completo</label>
+              <input
+                type="text"
+                id="field-nome"
+                placeholder="Seu nome"
+                disabled
+              />
+            </div>
+
+            <div class="profile-field-group">
+              <label>Nome de usuário</label>
+              <input
+                type="text"
+                id="field-usuario"
+                placeholder="@usuario"
+                disabled
+              />
+            </div>
+
+            <div class="profile-field-group">
+              <label>Email</label>
+              <input
+                type="email"
+                id="field-email"
+                placeholder="email@exemplo.com"
+                disabled
+              />
+            </div>
+
+            <div class="profile-field-group">
+              <label>Telefone</label>
+              <input
+                type="text"
+                id="field-telefone"
+                placeholder="+55 11 99999-9999"
+                disabled
+              />
+            </div>
+
+            <div class="profile-field-group">
+              <label>Data de nascimento</label>
+              <input type="date" id="field-nascimento" disabled />
+            </div>
+
+            <div class="profile-actions">
+              <button class="btn" id="btn-editar" onclick="toggleEdicao()">
+                Editar perfil
+              </button>
+              <button
+                class="btn btn-salvar"
+                id="btn-salvar"
+                onclick="salvarPerfil()"
+                style="display: none"
+              >
+                Salvar alterações
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA: Personalização -->
+        <section class="profile-tab" id="tab-personalizacao">
+          <h2 class="profile-section-title">Personalização</h2>
+
+          <div class="profile-card">
+            <div class="profile-field-group">
+              <label>Tema</label>
+              <div class="theme-options">
+                <button
+                  class="theme-btn active"
+                  id="btn-dark"
+                  onclick="setTema('dark')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                    ></path>
+                  </svg>
+                  Escuro
+                </button>
+                <button
+                  class="theme-btn"
+                  id="btn-light"
+                  onclick="setTema('light')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                  Claro
+                </button>
+              </div>
+            </div>
+
+            <p class="profile-wip">Mais opções de personalização em breve.</p>
+          </div>
+        </section>
+
+        <!-- ABA: Configurações -->
+        <section class="profile-tab" id="tab-configuracoes">
+          <h2 class="profile-section-title">Configurações</h2>
+
+          <div class="profile-card">
+            <div class="profile-field-group">
+              <label>Alterar senha</label>
+              <input
+                type="password"
+                id="cfg-senha-atual"
+                placeholder="Senha atual"
+              />
+              <input
+                type="password"
+                id="cfg-senha-nova"
+                placeholder="Nova senha"
+                style="margin-top: 8px"
+              />
+              <input
+                type="password"
+                id="cfg-senha-confirmar"
+                placeholder="Confirmar nova senha"
+                style="margin-top: 8px"
+              />
+              <button
+                class="btn"
+                style="margin-top: 12px"
+                onclick="alterarSenha()"
+              >
+                Salvar nova senha
+              </button>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <div class="profile-field-group">
+              <label>Notificações</label>
+              <p class="profile-wip">
+                Em breve: controle de notificações por email e SMS.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA: Excluir Conta -->
+        <section class="profile-tab" id="tab-conta">
+          <h2 class="profile-section-title" style="color: #f87171">
+            Excluir Conta
+          </h2>
+
+          <div class="profile-card profile-card-danger">
+            <p>
+              Esta ação é <strong>irreversível</strong>. Todos os seus dados
+              serão permanentemente deletados do sistema.
+            </p>
+            <div class="profile-field-group">
+              <label>Digite sua senha para confirmar</label>
+              <input
+                type="password"
+                id="excluir-senha"
+                placeholder="Sua senha"
+              />
+            </div>
+            <button class="btn btn-danger" onclick="excluirConta()">
+              Excluir minha conta permanentemente
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Popup estilizado -->
+    <div id="nexpath-popup" class="nexpath-popup">
+      <div class="nexpath-popup-content">
+        <span class="nexpath-popup-icon" id="popup-icon">⚠️</span>
+        <p id="popup-mensagem"></p>
+        <button class="btn" onclick="fecharPopup()">OK</button>
+      </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/profile.js"></script>
+  </body>
+</html>
