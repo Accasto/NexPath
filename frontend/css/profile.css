@@ -1,0 +1,330 @@
+/* ==========================================
+   profile.css — NexPath
+   Estilos da página de perfil
+   ========================================== */
+
+/* ------------------------------------------
+   Layout principal
+   ------------------------------------------ */
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 100px auto 60px;
+  padding: 0 5%;
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------------------------------
+   Sidebar
+   ------------------------------------------ */
+
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-avatar {
+  text-align: center;
+  padding: 28px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  margin-bottom: 8px;
+}
+
+.avatar-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-mid), var(--cyan-neon));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-family: "Orbitron", monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.profile-username {
+  font-family: "Orbitron", monospace;
+  font-size: 13px;
+  color: var(--blue-bright);
+  margin: 0 0 4px;
+  letter-spacing: 1px;
+}
+
+.profile-role {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ------------------------------------------
+   Navegação da sidebar
+   ------------------------------------------ */
+
+.profile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.profile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.profile-nav-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.profile-nav-item:hover {
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--blue-bright);
+}
+
+.profile-nav-item.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--blue-bright);
+}
+
+.profile-nav-danger {
+  color: #f87171 !important;
+  margin-top: 8px;
+  border-top: 1px solid rgba(248, 113, 113, 0.15);
+  padding-top: 16px;
+}
+
+.profile-nav-danger:hover {
+  background: rgba(248, 113, 113, 0.08) !important;
+  color: #f87171 !important;
+}
+
+/* ------------------------------------------
+   Conteúdo principal
+   ------------------------------------------ */
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-tab {
+  display: none;
+}
+
+.profile-tab.active {
+  display: block;
+}
+
+.profile-section-title {
+  font-family: "Orbitron", monospace;
+  font-size: 18px;
+  color: var(--blue-bright);
+  margin: 0 0 20px;
+  letter-spacing: 1px;
+}
+
+/* ------------------------------------------
+   Cards do perfil
+   ------------------------------------------ */
+
+.profile-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(16px);
+}
+
+.profile-card-danger {
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.profile-card-danger p {
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+/* ------------------------------------------
+   Campos de formulário
+   ------------------------------------------ */
+
+.profile-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.profile-field-group:last-child {
+  margin-bottom: 0;
+}
+
+.profile-field-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.profile-field-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.profile-actions .btn {
+  margin-top: 0;
+  padding: 10px 24px;
+  font-size: 13px;
+}
+
+.btn-salvar {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.25) !important;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4) !important;
+}
+
+/* ------------------------------------------
+   Divisor e WIP
+   ------------------------------------------ */
+
+.profile-divider {
+  height: 1px;
+  background: rgba(56, 189, 248, 0.1);
+  margin: 20px 0;
+}
+
+.profile-wip {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 8px 0 0;
+}
+
+/* ------------------------------------------
+   Tema (personalização)
+   ------------------------------------------ */
+
+.theme-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(2, 12, 27, 0.8);
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: "Syne", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.theme-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
+.theme-btn:hover {
+  border-color: var(--blue-bright);
+  color: var(--blue-bright);
+}
+
+.theme-btn.active {
+  background: linear-gradient(135deg, var(--blue-mid), var(--cyan-neon));
+  color: #000;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+/* ------------------------------------------
+   Media queries
+   ------------------------------------------ */
+
+@media (max-width: 768px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+    margin-top: 80px;
+    padding: 0 4%;
+  }
+
+  .profile-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .profile-nav-item {
+    flex: 1;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .profile-nav-danger {
+    border-top: none;
+    padding-top: 10px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-nav-item span {
+    display: none;
+  }
+
+  .avatar-circle {
+    width: 56px;
+    height: 56px;
+    font-size: 18px;
+  }
+}

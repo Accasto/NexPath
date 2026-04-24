@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Admin - NexPath</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">NexPath</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html" id="nav-usuario" class="nav-usuario-label"></a>
+        <a href="#" onclick="logout()" class="nav-btn-outline">Sair</a>
+      </nav>
+    </header>
+
+    <div class="admin-layout">
+      <!-- Header do painel -->
+      <div class="admin-header fade-in-1">
+        <div>
+          <h1>Painel <span class="nexpath-brand">Admin</span></h1>
+          <p>Gerencie usuários e permissões do sistema.</p>
+        </div>
+        <div class="admin-stats" id="admin-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="total-usuarios">—</span>
+            <span class="stat-label">Usuários</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="total-admins">—</span>
+            <span class="stat-label">Admins</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de usuários -->
+      <div class="admin-card fade-in-2">
+        <div class="admin-card-header">
+          <h2>Usuários cadastrados</h2>
+          <input
+            type="text"
+            id="busca-usuario"
+            placeholder="Buscar por nome ou usuário..."
+            oninput="filtrarUsuarios()"
+          />
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="tabela-usuarios">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Usuário</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Cadastro</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-usuarios">
+              <tr>
+                <td colspan="7" class="admin-loading">
+                  Carregando usuários...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup estilizado -->
+    <div id="nexpath-popup" class="nexpath-popup">
+      <div class="nexpath-popup-content">
+        <span class="nexpath-popup-icon" id="popup-icon">⚠️</span>
+        <p id="popup-mensagem"></p>
+        <button class="btn" onclick="fecharPopup()">OK</button>
+      </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/admin.js"></script>
+  </body>
+</html>

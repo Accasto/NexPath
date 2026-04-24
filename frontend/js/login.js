@@ -42,11 +42,11 @@ async function validarLogin() {
       return;
     }
 
-    // sessionStorage mantém o login durante a navegação na aba
-    // Some automaticamente quando o usuário fecha o navegador
+    // Salva token, dados e role do usuário
     sessionStorage.setItem('nexpath_token', dados.token);
     sessionStorage.setItem('nexpath_usuario', dados.usuario.usuario);
     sessionStorage.setItem('nexpath_nome', dados.usuario.nome);
+    sessionStorage.setItem('nexpath_role', dados.usuario.role);
 
     window.location.href = 'dashboard.html';
 
